@@ -18,9 +18,9 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  String _username = "";
-  String _email = "";
-  String _password = "";
+  String username = "";
+  String email = "";
+  String password = "";
 
   bool _obscureText = true;
 
@@ -30,17 +30,17 @@ class _SignupScreenState extends State<SignupScreen> {
 
     _usernameController.addListener(() {
       setState(() {
-        _username = _usernameController.text;
+        username = _usernameController.text;
       });
     });
     _emailController.addListener(() {
       setState(() {
-        _email = _emailController.text;
+        email = _emailController.text;
       });
     });
     _passwordController.addListener(() {
       setState(() {
-        _password = _passwordController.text;
+        password = _passwordController.text;
       });
     });
   }
@@ -54,10 +54,10 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   String? _isEmailValid() {
-    if (_email.isEmpty) return null;
+    if (email.isEmpty) return null;
     final regExp = RegExp(
         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-    if (!regExp.hasMatch(_email)) {
+    if (!regExp.hasMatch(email)) {
       return "Email not valid";
     }
     return null;
@@ -68,7 +68,7 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   void _onNextTap() {
-    if (_isEmailValid() != null || _email.isEmpty || _username.isEmpty) return;
+    if (_isEmailValid() != null || email.isEmpty || username.isEmpty) return;
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -83,10 +83,12 @@ class _SignupScreenState extends State<SignupScreen> {
     });
   }
 
-  bool _isPasswordValid() {
-    return _password.isNotEmpty &&
-        _password.length > 8 &&
-        _password.length < 21;
+  String? _isPasswordValid() {
+    if (password.isEmpty) return null;
+    if (password.length < 8 || password.length > 20) {
+      return "your password should be 9 to 20";
+    }
+    return null;
   }
 
   void _toggleObscureText() {
@@ -104,7 +106,8 @@ class _SignupScreenState extends State<SignupScreen> {
           title: Text(
             "Sign Up",
             style: GoogleFonts.sarabun(
-              fontSize: Sizes.size20,
+              fontSize: Sizes.size28,
+              fontWeight: FontWeight.w400,
             ),
           ),
         ),
@@ -127,6 +130,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   TextField(
                     controller: _usernameController,
                     decoration: InputDecoration(
+                      filled: true, // 배경색 활성화
+                      fillColor: Colors.white,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5),
                         borderSide: const BorderSide(
@@ -154,6 +159,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   TextField(
                     controller: _emailController,
                     decoration: InputDecoration(
+                      filled: true, // 배경색 활성화
+                      fillColor: Colors.white,
                       errorText: _isEmailValid(),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5),
@@ -183,9 +190,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     obscureText: _obscureText,
                     controller: _passwordController,
                     decoration: InputDecoration(
-                      errorText: _isPasswordValid()
-                          ? null
-                          : "your password should be 9 to 20",
+                      filled: true, // 배경색 활성화
+                      fillColor: Colors.white,
+                      errorText: _isPasswordValid(),
+
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5),
                         borderSide: const BorderSide(
@@ -216,8 +224,8 @@ class _SignupScreenState extends State<SignupScreen> {
                             onTap: _toggleObscureText,
                             child: FaIcon(
                               _obscureText
-                                  ? FontAwesomeIcons.eye
-                                  : FontAwesomeIcons.eyeSlash,
+                                  ? FontAwesomeIcons.eyeSlash
+                                  : FontAwesomeIcons.eye,
                               color: Colors.grey.shade500,
                               size: Sizes.size18,
                             ),
@@ -241,7 +249,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       child: Text(
                         "Sign up",
                         style: GoogleFonts.scheherazadeNew(
-                          color: Colors.white,
+                          color: Color(0xFFE0E6FE),
                           fontSize: Sizes.size20 + Sizes.size2,
                         ),
                       ),
