@@ -68,22 +68,25 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   void _onNextTap() {
-    if (_isEmailValid() != null || _email.isEmpty) return;
+    if (_isEmailValid() != null || _email.isEmpty || _username.isEmpty) return;
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => const SetupProfileScreen(),
       ),
     );
-    return;
   }
 
   void onClearTap() {
-    _passwordController.clear();
+    setState(() {
+      _passwordController.clear();
+    });
   }
 
   bool _isPasswordValid() {
-    return _password.isNotEmpty && _password.length > 8;
+    return _password.isNotEmpty &&
+        _password.length > 8 &&
+        _password.length < 21;
   }
 
   void _toggleObscureText() {
@@ -121,24 +124,22 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                   Gaps.v10,
-                  SizedBox(
-                    width: 600,
-                    height: 37,
-                    child: TextField(
-                      controller: _usernameController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide: const BorderSide(
-                            color: Colors.grey,
-                          ),
-                          gapPadding: Sizes.size2,
-                        ),
-                        hintText: "Input your name",
-                        hintStyle: GoogleFonts.scheherazadeNew(
-                          fontSize: Sizes.size16,
+                  TextField(
+                    controller: _usernameController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: const BorderSide(
                           color: Colors.grey,
                         ),
+                        gapPadding: Sizes.size2,
+                      ),
+                      hintText: "Input your name",
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                      hintStyle: GoogleFonts.scheherazadeNew(
+                        fontSize: Sizes.size16,
+                        color: Colors.grey,
                       ),
                     ),
                   ),
@@ -150,25 +151,23 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                   Gaps.v10,
-                  SizedBox(
-                    width: 600,
-                    height: 37,
-                    child: TextField(
-                      controller: _emailController,
-                      decoration: InputDecoration(
-                        errorText: _isEmailValid(),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide: const BorderSide(
-                            color: Colors.grey,
-                          ),
-                          gapPadding: Sizes.size2,
-                        ),
-                        hintText: "Input your email",
-                        hintStyle: GoogleFonts.scheherazadeNew(
-                          fontSize: Sizes.size16,
+                  TextField(
+                    controller: _emailController,
+                    decoration: InputDecoration(
+                      errorText: _isEmailValid(),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: const BorderSide(
                           color: Colors.grey,
                         ),
+                        gapPadding: Sizes.size2,
+                      ),
+                      hintText: "Input your email",
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                      hintStyle: GoogleFonts.scheherazadeNew(
+                        fontSize: Sizes.size16,
+                        color: Colors.grey,
                       ),
                     ),
                   ),
@@ -180,49 +179,50 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                   ),
                   Gaps.v10,
-                  SizedBox(
-                    width: 600,
-                    height: 37,
-                    child: TextField(
-                      obscureText: _obscureText,
-                      controller: _passwordController,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide: const BorderSide(
-                            color: Colors.grey,
-                          ),
-                          gapPadding: Sizes.size2,
-                        ),
-                        hintText: "Input your password",
-                        hintStyle: GoogleFonts.scheherazadeNew(
-                          fontSize: Sizes.size16,
+                  TextField(
+                    obscureText: _obscureText,
+                    controller: _passwordController,
+                    decoration: InputDecoration(
+                      errorText: _isPasswordValid()
+                          ? null
+                          : "your password should be 9 to 20",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: const BorderSide(
                           color: Colors.grey,
                         ),
-                        suffix: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            GestureDetector(
-                              onTap: onClearTap,
-                              child: FaIcon(
-                                FontAwesomeIcons.solidCircleXmark,
-                                color: Colors.grey.shade500,
-                                size: Sizes.size18,
-                              ),
+                        gapPadding: Sizes.size2,
+                      ),
+                      hintText: "Input your password",
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                      hintStyle: GoogleFonts.scheherazadeNew(
+                        fontSize: Sizes.size16,
+                        color: Colors.grey,
+                      ),
+                      suffix: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          GestureDetector(
+                            onTap: onClearTap,
+                            child: FaIcon(
+                              FontAwesomeIcons.solidCircleXmark,
+                              color: Colors.grey.shade500,
+                              size: Sizes.size18,
                             ),
-                            Gaps.h8,
-                            GestureDetector(
-                              onTap: _toggleObscureText,
-                              child: FaIcon(
-                                _obscureText
-                                    ? FontAwesomeIcons.eye
-                                    : FontAwesomeIcons.eyeSlash,
-                                color: Colors.grey.shade500,
-                                size: Sizes.size18,
-                              ),
+                          ),
+                          Gaps.h8,
+                          GestureDetector(
+                            onTap: _toggleObscureText,
+                            child: FaIcon(
+                              _obscureText
+                                  ? FontAwesomeIcons.eye
+                                  : FontAwesomeIcons.eyeSlash,
+                              color: Colors.grey.shade500,
+                              size: Sizes.size18,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -230,8 +230,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   GestureDetector(
                     onTap: _onNextTap,
                     child: Container(
+                      padding: EdgeInsets.symmetric(vertical: Sizes.size6),
                       width: 660,
-                      height: 37,
+                      height: 45,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
