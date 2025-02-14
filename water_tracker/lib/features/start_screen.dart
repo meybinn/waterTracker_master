@@ -11,10 +11,10 @@ class StartScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: scaffoldBackgroundColor,
         appBar: AppBar(
-          title: const Text("Drink Up!"),
+          title: Text("Drink Up!"),
         ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(
+          padding: EdgeInsets.symmetric(
             vertical: 50,
             horizontal: 24,
           ),

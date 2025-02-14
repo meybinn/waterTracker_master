@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:water_tracker/constant/sizes.dart';
 
 class Gaps {
-  // Vertical Gaps
+  // Vertical Gaps (v)
   static const v1 = SizedBox(height: Sizes.size1);
   static const v2 = SizedBox(height: Sizes.size2);
   static const v3 = SizedBox(height: Sizes.size3);

@@ -14,10 +14,10 @@ class WaterTracker extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFFE0E6FE),
-        appBarTheme: const AppBarTheme(
+        appBarTheme: AppBarTheme(
           backgroundColor: Color(0xFFE0E6FE),
         ),
-        bottomAppBarTheme: const BottomAppBarTheme(
+        bottomAppBarTheme: BottomAppBarTheme(
           color: Color(0xFFE0E6FE),
         ),
       ),

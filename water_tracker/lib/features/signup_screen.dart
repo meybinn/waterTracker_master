@@ -67,15 +67,15 @@ class _SignupScreenState extends State<SignupScreen> {
     FocusScope.of(context).unfocus();
   }
 
-  String? _onNextTap() {
-    if (_isEmailValid() != null || _email.isEmpty) return "take a look again";
+  void _onNextTap() {
+    if (_isEmailValid() != null || _email.isEmpty) return;
     Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => const SetupProfileScreen(),
       ),
     );
-    return null;
+    return;
   }
 
   void onClearTap() {
