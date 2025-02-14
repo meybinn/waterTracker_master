@@ -1,7 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:water_tracker/constant/gaps.dart';
+import 'package:water_tracker/constant/sizes.dart';
+import 'package:water_tracker/features/signIn_screen.dart';
+import 'package:water_tracker/features/signup_screen.dart';
 
-class StartScreen extends StatelessWidget {
+class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
+
+  @override
+  State<StartScreen> createState() => _StartScreenState();
+}
+
+class _StartScreenState extends State<StartScreen> {
+  void _onSignUpTap() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SignupScreen(),
+      ),
+    );
+  }
+
+  void _onSignInTap() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SigninScreen(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -10,100 +38,112 @@ class StartScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: scaffoldBackgroundColor,
-        appBar: AppBar(
-          title: Text("Drink Up!"),
-        ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: 50,
-            horizontal: 24,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.local_drink,
-                size: 120,
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                ),
-                child: Text(
-                  textAlign: TextAlign.center,
-                  '"Get daily reminders tracks, reminder your progress, and stay on top of your hydration goals."',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.grey[500],
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        offset: const Offset(0, 4),
-                        blurRadius: 4,
-                      ),
-                    ],
-                  ),
-                  child: const Text(
-                    'Sign Up',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+        body: Stack(
+          children: [
+            Positioned(
+              left: 46,
+              right: 25,
+              top: 46,
+              bottom: 156,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Drink",
+                    style: GoogleFonts.righteous(
+                      color: Color(0xFF7C7C7C),
+                      fontSize: Sizes.size60 + Sizes.size4,
                     ),
                   ),
-                ),
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        offset: const Offset(0, 4),
-                        blurRadius: 4,
-                      ),
-                    ],
-                  ),
-                  child: const Text(
-                    'Sign in',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                  Text(
+                    "Up!",
+                    style: GoogleFonts.righteous(
+                      color: Color(0xFF7C7C7C),
+                      fontSize: Sizes.size60 + Sizes.size4,
                     ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 50,
+                horizontal: 24,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.local_drink,
+                    size: 150,
+                  ),
+                  Gaps.v10,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 85,
+                    ),
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      '"Get daily reminders tracks, reminder your progress, and stay on top of your hydration goals."',
+                      style: GoogleFonts.roboto(
+                        color: Color(0xFF7C7C7C),
+                        fontSize: Sizes.size14 + Sizes.size1,
+                      ),
+                      maxLines: 3,
+                      softWrap: true,
+                    ),
+                  ),
+                  Gaps.v20,
+                  GestureDetector(
+                    onTap: _onSignUpTap,
+                    child: Container(
+                      width: 177,
+                      height: 52,
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 10,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Text(
+                        'Sign Up',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.righteous(
+                          color: Colors.white,
+                          fontSize: Sizes.size20,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Gaps.v20,
+                  GestureDetector(
+                    onTap: _onSignInTap,
+                    child: Container(
+                      width: 177,
+                      height: 52,
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 10,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Text(
+                        'Sign In',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.righteous(
+                          color: Colors.white,
+                          fontSize: Sizes.size20,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
