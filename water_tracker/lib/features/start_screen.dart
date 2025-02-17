@@ -5,7 +5,6 @@ import 'package:water_tracker/constant/sizes.dart';
 import 'package:water_tracker/features/signIn_screen.dart';
 import 'package:water_tracker/features/signup_screen.dart';
 
-
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
 
@@ -35,7 +34,7 @@ class _StartScreenState extends State<StartScreen> {
   @override
   Widget build(BuildContext context) {
     final scaffoldBackgroundColor = Theme.of(context).scaffoldBackgroundColor;
-    
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: scaffoldBackgroundColor,
@@ -111,7 +110,7 @@ class _StartScreenState extends State<StartScreen> {
                       child: Text(
                         'Sign Up',
                         textAlign: TextAlign.center,
-                        style: GoogleFonts.righteous( 
+                        style: GoogleFonts.righteous(
                           color: Colors.white,
                           fontSize: Sizes.size20,
                         ),
@@ -137,10 +136,10 @@ class _StartScreenState extends State<StartScreen> {
                         style: GoogleFonts.righteous(
                           color: Colors.white,
                           fontSize: Sizes.size20,
-                         ),
                         ),
                       ),
                     ),
+                  ),
                 ],
               ),
             ),
