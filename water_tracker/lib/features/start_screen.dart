@@ -2,9 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
+<<<<<<< HEAD
+=======
+import 'package:water_tracker/features/signIn_screen.dart';
+import 'package:water_tracker/features/signup_screen.dart';
+>>>>>>> 1fc21d3391dbb0f9959d7f99e019cda980bd1541
 
-class StartScreen extends StatelessWidget {
+class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
+
+  @override
+  State<StartScreen> createState() => _StartScreenState();
+}
+
+class _StartScreenState extends State<StartScreen> {
+  void _onSignUpTap() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SignupScreen(),
+      ),
+    );
+  }
+
+  void _onSignInTap() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SigninScreen(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +99,11 @@ class StartScreen extends StatelessWidget {
                   ),
                   Gaps.v20,
                   GestureDetector(
+<<<<<<< HEAD
                     onTap: () {},
+=======
+                    onTap: _onSignUpTap,
+>>>>>>> 1fc21d3391dbb0f9959d7f99e019cda980bd1541
                     child: Container(
                       width: 177,
                       height: 52,
@@ -85,7 +117,11 @@ class StartScreen extends StatelessWidget {
                       child: Text(
                         'Sign Up',
                         textAlign: TextAlign.center,
+<<<<<<< HEAD
                         style: GoogleFonts.righteous( 
+=======
+                        style: GoogleFonts.righteous(
+>>>>>>> 1fc21d3391dbb0f9959d7f99e019cda980bd1541
                           color: Colors.white,
                           fontSize: Sizes.size20,
                         ),
@@ -94,7 +130,11 @@ class StartScreen extends StatelessWidget {
                   ),
                   Gaps.v20,
                   GestureDetector(
+<<<<<<< HEAD
                     onTap: () {},
+=======
+                    onTap: _onSignInTap,
+>>>>>>> 1fc21d3391dbb0f9959d7f99e019cda980bd1541
                     child: Container(
                       width: 177,
                       height: 52,
@@ -111,7 +151,11 @@ class StartScreen extends StatelessWidget {
                         style: GoogleFonts.righteous(
                           color: Colors.white,
                           fontSize: Sizes.size20,
+<<<<<<< HEAD
                          ),
+=======
+                        ),
+>>>>>>> 1fc21d3391dbb0f9959d7f99e019cda980bd1541
                       ),
                     ),
                   ),

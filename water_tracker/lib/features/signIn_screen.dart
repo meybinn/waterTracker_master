@@ -4,21 +4,17 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
 
-import 'package:water_tracker/features/setup_profile_screen.dart';
-
-class SignupScreen extends StatefulWidget {
-  const SignupScreen({super.key});
+class SigninScreen extends StatefulWidget {
+  const SigninScreen({super.key});
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  State<SigninScreen> createState() => _SigninScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
-  final TextEditingController _usernameController = TextEditingController();
+class _SigninScreenState extends State<SigninScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  String username = "";
   String email = "";
   String password = "";
 
@@ -28,11 +24,6 @@ class _SignupScreenState extends State<SignupScreen> {
   void initState() {
     super.initState();
 
-    _usernameController.addListener(() {
-      setState(() {
-        username = _usernameController.text;
-      });
-    });
     _emailController.addListener(() {
       setState(() {
         email = _emailController.text;
@@ -47,10 +38,19 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   void dispose() {
-    _usernameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  void _onNextTap() {
+    if (email.isEmpty || password.isEmpty) return;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Container(),
+      ),
+    );
   }
 
   String? _isEmailValid() {
@@ -63,37 +63,27 @@ class _SignupScreenState extends State<SignupScreen> {
     return null;
   }
 
+  String? _isPasswordValid() {
+    if (password.isEmpty) return null;
+    if (password.length < 9 || password.length > 20) {
+      return "your password should be 9 to 20";
+    }
+    return null;
+  }
+
   void _onScaffoldTap() {
     FocusScope.of(context).unfocus();
   }
 
-  void _onNextTap() {
-    if (_isEmailValid() != null || email.isEmpty || username.isEmpty) return;
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const SetupProfileScreen(),
-      ),
-    );
+  void _toggleObscureText() {
+    _obscureText = !_obscureText;
+    setState(() {});
   }
 
   void onClearTap() {
     setState(() {
       _passwordController.clear();
     });
-  }
-
-  String? _isPasswordValid() {
-    if (password.isEmpty) return null;
-    if (password.length < 8 || password.length > 20) {
-      return "your password should be 9 to 20";
-    }
-    return null;
-  }
-
-  void _toggleObscureText() {
-    _obscureText = !_obscureText;
-    setState(() {});
   }
 
   @override
@@ -104,7 +94,7 @@ class _SignupScreenState extends State<SignupScreen> {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            "Sign Up",
+            "Sign in",
             style: GoogleFonts.sarabun(
               fontSize: Sizes.size28,
               fontWeight: FontWeight.w400,
@@ -121,35 +111,6 @@ class _SignupScreenState extends State<SignupScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Username",
-                    style: GoogleFonts.scheherazadeNew(
-                      fontSize: Sizes.size20,
-                    ),
-                  ),
-                  Gaps.v10,
-                  TextField(
-                    controller: _usernameController,
-                    decoration: InputDecoration(
-                      filled: true, // 배경색 활성화
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: const BorderSide(
-                          color: Colors.grey,
-                        ),
-                        gapPadding: Sizes.size2,
-                      ),
-                      hintText: "Input your name",
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                      hintStyle: GoogleFonts.scheherazadeNew(
-                        fontSize: Sizes.size16,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-                  Gaps.v10,
-                  Text(
                     "Email",
                     style: GoogleFonts.scheherazadeNew(
                       fontSize: Sizes.size20,
@@ -161,7 +122,6 @@ class _SignupScreenState extends State<SignupScreen> {
                     decoration: InputDecoration(
                       filled: true, // 배경색 활성화
                       fillColor: Colors.white,
-                      errorText: _isEmailValid(),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5),
                         borderSide: const BorderSide(
@@ -170,6 +130,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         gapPadding: Sizes.size2,
                       ),
                       hintText: "Input your email",
+                      errorText: _isEmailValid(),
                       contentPadding:
                           EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                       hintStyle: GoogleFonts.scheherazadeNew(
@@ -187,13 +148,12 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   Gaps.v10,
                   TextField(
-                    obscureText: _obscureText,
                     controller: _passwordController,
+                    obscureText: _obscureText,
                     decoration: InputDecoration(
                       filled: true, // 배경색 활성화
                       fillColor: Colors.white,
                       errorText: _isPasswordValid(),
-
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5),
                         borderSide: const BorderSide(

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:water_tracker/features/setup_profile_screen.dart';
+import 'package:water_tracker/features/signIn_screen.dart';
 
 import 'package:water_tracker/features/signup_screen.dart';
+import 'package:water_tracker/features/start_screen.dart';
 
 void main() {
   runApp(const WaterTracker());
@@ -12,16 +15,20 @@ class WaterTracker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xFFE0E6FE),
-        appBarTheme: AppBarTheme(
-          backgroundColor: Color(0xFFE0E6FE),
+        theme: ThemeData(
+          primaryColor: Color(0xFF7C7C7C),
+          scaffoldBackgroundColor: const Color(0xFFE0E6FE),
+          appBarTheme: AppBarTheme(
+            backgroundColor: Color(0xFFE0E6FE),
+          ),
+          bottomAppBarTheme: BottomAppBarTheme(
+            color: Color(0xFFE0E6FE),
+          ),
         ),
-        bottomAppBarTheme: BottomAppBarTheme(
-          color: Color(0xFFE0E6FE),
-        ),
-      ),
-      home: const SignupScreen(),
-    );
+        home: SigninScreen()
+        // home: StartScreen(),
+        // home: SignupScreen(),
+        // home: const SetupProfileScreen(),
+        );
   }
 }
