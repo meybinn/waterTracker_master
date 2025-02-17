@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:water_tracker/features/history_screen.dart';
 import 'package:water_tracker/features/home_screen.dart';
 import 'package:water_tracker/features/main_navigation/main_navigation_screen.dart';
 import 'package:water_tracker/features/setup_profile_screen.dart';
 import 'package:water_tracker/features/signIn_screen.dart';
-
 import 'package:water_tracker/features/signup_screen.dart';
 import 'package:water_tracker/features/start_screen.dart';
 
@@ -27,9 +27,10 @@ class WaterTracker extends StatelessWidget {
             color: Color(0xFFE0E6FE),
           ),
         ),
-        home: MainNavigationScreen(tab: "home")
-        // home: HomeScreen()
-        // home: SigninScreen()
+        home: HistoryScreen(),
+        // home: MainNavigationScreen(tab: "home"),
+        // home: HomeScreen(),
+        // home: SigninScreen(),
         // home: StartScreen(),
         // home: SignupScreen(),
         // home: const SetupProfileScreen(),
