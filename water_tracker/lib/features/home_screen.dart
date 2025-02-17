@@ -46,13 +46,13 @@ class _HomeScreenState extends State<HomeScreen>
 
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Gaps.v44,
+            Gaps.v20,
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Icon(
                   Icons.account_circle_outlined,
