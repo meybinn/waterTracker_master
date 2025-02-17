@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
-import 'package:water_tracker/main.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,6 +15,12 @@ class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
+
+  final int intakeGoal = 2200;
+  final double intakeReal = 1500;
+
+  DateTime now = DateTime.now();
+  String date = DateFormat('MMMM d, yyyy').format(DateTime.now());
 
   @override
   void initState() {
@@ -36,6 +41,9 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    double outerConHeight = MediaQuery.of(context).size.height * 0.4 + 60;
+    double actualIntakeHeight = outerConHeight * (intakeReal / intakeGoal);
+
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(16),
@@ -64,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen>
                     ),
                     Gaps.v4,
                     Text(
-                      "March 13, 2025",
+                      date,
                       style: GoogleFonts.righteous(
                         fontSize: Sizes.size20,
                         color: Color(0XFF7C7C7C),
@@ -76,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen>
             ),
             Gaps.v20,
             Text(
-              "2200ml",
+              "$intakeGoal ml",
               style: GoogleFonts.righteous(
                 fontSize: Sizes.size28,
                 color: Color(0XFF7C7C7C),
@@ -84,33 +92,55 @@ class _HomeScreenState extends State<HomeScreen>
             ),
             Gaps.v2,
             Stack(
-              alignment: Alignment.bottomCenter,
+              alignment: Alignment.center,
               children: [
-                Icon(
-                  Icons.local_drink,
-                  size: 200,
-                  color: Colors.grey.shade300,
-                ),
-                AnimatedContainer(
-                  duration: Duration(seconds: 5),
-                  curve: Curves.easeInOut,
-                  height: 150 * _animation.value,
-                  width: 100,
+                Container(
+                  alignment: Alignment.center,
+                  width: 220,
+                  height: outerConHeight,
                   decoration: BoxDecoration(
-                    color: Colors.blueAccent,
-                    borderRadius: BorderRadius.circular(18),
+                    color: Color(0x507C7C7C),
+                    border: Border.all(
+                      width: 6,
+                      color: Colors.grey.shade500,
+                    ),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(23),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 6,
+                  child: Container(
+                    alignment: Alignment.topCenter,
+                    width: 207,
+                    height: actualIntakeHeight,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(200, 255, 255, 255),
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(22),
+                        bottomRight: Radius.circular(22),
+                      ),
+                    ),
+                  ),
+                ),
+                Text(
+                  "$intakeReal ml",
+                  style: GoogleFonts.righteous(
+                    fontSize: Sizes.size24,
+                    color: Colors.grey.shade600,
                   ),
                 ),
               ],
             ),
-            Gaps.v36,
+            Gaps.v28,
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Column(
                   children: [
                     Text(
-                      "50%",
+                      "${(intakeReal / intakeGoal * 100).floor()}%",
                       style: GoogleFonts.righteous(
                         fontSize: Sizes.size28,
                         color: Color(0XFF7C7C7C),
@@ -125,6 +155,7 @@ class _HomeScreenState extends State<HomeScreen>
                     ),
                   ],
                 ),
+                Gaps.h32,
                 Column(
                   children: [
                     Text(

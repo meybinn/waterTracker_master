@@ -5,14 +5,16 @@ import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
 
 class SetUpGoalScreen extends StatefulWidget {
-  const SetUpGoalScreen({super.key});
+  const SetUpGoalScreen({
+    super.key,
+  });
 
   @override
   State<SetUpGoalScreen> createState() => _SetUpGoalScreenState();
 }
 
 class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
-  int _intakeGoal = 2000;
+  int intakeGoal = 2200;
   TimeOfDay? fromTime;
   TimeOfDay? toTime;
   int _interval = 1;
@@ -20,16 +22,16 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
 
   void _increaseGoal() {
     setState(() {
-      _intakeGoal += 10;
-      _sliderValue = _intakeGoal.toDouble();
+      intakeGoal += 10;
+      _sliderValue = intakeGoal.toDouble();
     });
   }
 
   void _decreaseGoal() {
     setState(() {
-      if (_intakeGoal > 10) {
-        _intakeGoal -= 10;
-        _sliderValue = _intakeGoal.toDouble();
+      if (intakeGoal > 10) {
+        intakeGoal -= 10;
+        _sliderValue = intakeGoal.toDouble();
       }
     });
   }
@@ -54,7 +56,7 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
   @override
   Widget build(BuildContext context) {
     final scaffoldBackgroundColor = Theme.of(context).scaffoldBackgroundColor;
-   
+
     return Scaffold(
       backgroundColor: scaffoldBackgroundColor,
       body: Padding(
@@ -74,7 +76,7 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
               ),
               child: Text(
                 textAlign: TextAlign.center,
-                "You're daily intake goal is $_intakeGoal ml",
+                "You're daily intake goal is $intakeGoal ml",
                 style: GoogleFonts.hammersmithOne(
                   fontSize: Sizes.size22,
                   color: Color(0xFF7C7C7C),
@@ -127,7 +129,7 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                       onChanged: (double newValue) {
                         setState(() {
                           _sliderValue = newValue;
-                          _intakeGoal = _sliderValue.toInt();
+                          intakeGoal = _sliderValue.toInt();
                         });
                       }),
                 ),
