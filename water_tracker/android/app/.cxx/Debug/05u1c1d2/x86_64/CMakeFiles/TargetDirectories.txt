@@ -1,0 +1,2 @@
+D:/dev/webProgramming/waterTracker_master/water_tracker/android/app/.cxx/Debug/05u1c1d2/x86_64/CMakeFiles/edit_cache.dir
+D:/dev/webProgramming/waterTracker_master/water_tracker/android/app/.cxx/Debug/05u1c1d2/x86_64/CMakeFiles/rebuild_cache.dir
