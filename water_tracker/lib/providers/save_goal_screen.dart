@@ -4,16 +4,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
 
-class SetUpGoalScreen extends StatefulWidget {
-  const SetUpGoalScreen({
+class SaveGoalScreen extends StatefulWidget {
+  const SaveGoalScreen({
     super.key,
   });
 
   @override
-  State<SetUpGoalScreen> createState() => _SetUpGoalScreenState();
+  State<SaveGoalScreen> createState() => _SaveGoalScreenState();
 }
 
-class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
+class _SaveGoalScreenState extends State<SaveGoalScreen> {
   int intakeGoal = 2200;
   TimeOfDay? fromTime;
   TimeOfDay? toTime;
@@ -265,12 +265,12 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(150, 60),
-                    backgroundColor: Color(0xFFD9D9D9),
+                    backgroundColor: Color(0xFF4C89B2),
                   ),
                   child: Text(
-                    "Back",
+                    "Save",
                     style: GoogleFonts.scheherazadeNew(
-                      color: Color(0XFF828282),
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: Sizes.size20,
                     ),
@@ -280,15 +280,15 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(150, 60),
-                    backgroundColor: Color(0xFF4C89B2),
+                    backgroundColor: Color(0xFFD9D9D9),
                   ),
                   child: Text(
-                    "Next",
+                    "Don't save",
                     style: GoogleFonts.scheherazadeNew(
-                      color: Colors.white,
+                      color: Color(0XFF828282),
                       fontWeight: FontWeight.bold,
                       fontSize: Sizes.size20,
-                    ),
+                    ), 
                   ),
                 ),
               ],
