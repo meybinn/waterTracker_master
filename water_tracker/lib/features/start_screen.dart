@@ -4,6 +4,10 @@ import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
 import 'package:water_tracker/features/signIn_screen.dart';
 import 'package:water_tracker/features/signup_screen.dart';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4b7bcbf218f41c9b99d3e667475d7f27310337fa
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
@@ -110,7 +114,11 @@ class _StartScreenState extends State<StartScreen> {
                       child: Text(
                         'Sign Up',
                         textAlign: TextAlign.center,
+<<<<<<< HEAD
                         style: GoogleFonts.righteous(
+=======
+                        style: GoogleFonts.righteous( 
+>>>>>>> 4b7bcbf218f41c9b99d3e667475d7f27310337fa
                           color: Colors.white,
                           fontSize: Sizes.size20,
                         ),
@@ -119,7 +127,11 @@ class _StartScreenState extends State<StartScreen> {
                   ),
                   Gaps.v20,
                   GestureDetector(
+<<<<<<< HEAD
                     onTap: () {},
+=======
+                    onTap: _onSignInTap,
+>>>>>>> 4b7bcbf218f41c9b99d3e667475d7f27310337fa
                     child: Container(
                       width: 177,
                       height: 52,
@@ -136,10 +148,13 @@ class _StartScreenState extends State<StartScreen> {
                         style: GoogleFonts.righteous(
                           color: Colors.white,
                           fontSize: Sizes.size20,
+<<<<<<< HEAD
+=======
+                         ),
+>>>>>>> 4b7bcbf218f41c9b99d3e667475d7f27310337fa
                         ),
                       ),
                     ),
-                  ),
                 ],
               ),
             ),
