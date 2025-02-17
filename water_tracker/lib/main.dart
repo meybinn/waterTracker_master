@@ -17,23 +17,23 @@ class WaterTracker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(
-          primaryColor: Color(0xFF7C7C7C),
-          scaffoldBackgroundColor: const Color(0xFFE0E6FE),
-          appBarTheme: AppBarTheme(
-            backgroundColor: Color(0xFFE0E6FE),
-          ),
-          bottomAppBarTheme: BottomAppBarTheme(
-            color: Color(0xFFE0E6FE),
-          ),
+      theme: ThemeData(
+        primaryColor: Color(0xFF7C7C7C),
+        scaffoldBackgroundColor: const Color(0xFFE0E6FE),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Color(0xFFE0E6FE),
         ),
-        home: HistoryScreen(),
-        // home: MainNavigationScreen(tab: "home"),
-        // home: HomeScreen(),
-        // home: SigninScreen(),
-        // home: StartScreen(),
-        // home: SignupScreen(),
-        // home: const SetupProfileScreen(),
-        );
+        bottomAppBarTheme: BottomAppBarTheme(
+          color: Color(0xFFE0E6FE),
+        ),
+      ),
+      // home: HistoryScreen(),
+      home: MainNavigationScreen(tab: "add"),
+      // home: HomeScreen(),
+      // home: SigninScreen(),
+      // home: StartScreen(),
+      // home: SignupScreen(),
+      // home: const SetupProfileScreen(),
+    );
   }
 }
