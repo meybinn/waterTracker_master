@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
-<<<<<<< HEAD
-=======
 import 'package:water_tracker/features/signIn_screen.dart';
 import 'package:water_tracker/features/signup_screen.dart';
->>>>>>> 1fc21d3391dbb0f9959d7f99e019cda980bd1541
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
@@ -37,7 +34,7 @@ class _StartScreenState extends State<StartScreen> {
   @override
   Widget build(BuildContext context) {
     final scaffoldBackgroundColor = Theme.of(context).scaffoldBackgroundColor;
-    
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: scaffoldBackgroundColor,
@@ -99,11 +96,7 @@ class _StartScreenState extends State<StartScreen> {
                   ),
                   Gaps.v20,
                   GestureDetector(
-<<<<<<< HEAD
-                    onTap: () {},
-=======
                     onTap: _onSignUpTap,
->>>>>>> 1fc21d3391dbb0f9959d7f99e019cda980bd1541
                     child: Container(
                       width: 177,
                       height: 52,
@@ -117,11 +110,7 @@ class _StartScreenState extends State<StartScreen> {
                       child: Text(
                         'Sign Up',
                         textAlign: TextAlign.center,
-<<<<<<< HEAD
-                        style: GoogleFonts.righteous( 
-=======
                         style: GoogleFonts.righteous(
->>>>>>> 1fc21d3391dbb0f9959d7f99e019cda980bd1541
                           color: Colors.white,
                           fontSize: Sizes.size20,
                         ),
@@ -130,11 +119,7 @@ class _StartScreenState extends State<StartScreen> {
                   ),
                   Gaps.v20,
                   GestureDetector(
-<<<<<<< HEAD
                     onTap: () {},
-=======
-                    onTap: _onSignInTap,
->>>>>>> 1fc21d3391dbb0f9959d7f99e019cda980bd1541
                     child: Container(
                       width: 177,
                       height: 52,
@@ -151,11 +136,7 @@ class _StartScreenState extends State<StartScreen> {
                         style: GoogleFonts.righteous(
                           color: Colors.white,
                           fontSize: Sizes.size20,
-<<<<<<< HEAD
-                         ),
-=======
                         ),
->>>>>>> 1fc21d3391dbb0f9959d7f99e019cda980bd1541
                       ),
                     ),
                   ),
