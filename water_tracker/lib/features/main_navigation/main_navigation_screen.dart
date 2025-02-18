@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:water_tracker/constant/sizes.dart';
+import 'package:water_tracker/features/add_intake.dart';
 import 'package:water_tracker/features/history_screen.dart';
 import 'package:water_tracker/features/home_screen.dart';
 import 'package:water_tracker/features/main_navigation/nev_tab.dart';
@@ -55,7 +56,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           // intake
           Offstage(
             offstage: _selectedIndex != 2,
-            child: Container(),
+            child: AddIntake(),
           ),
 
           // setting goal
