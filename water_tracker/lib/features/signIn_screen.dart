@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
+import 'package:water_tracker/features/main_navigation/main_navigation_screen.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -48,7 +49,7 @@ class _SigninScreenState extends State<SigninScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => Container(),
+        builder: (context) => MainNavigationScreen(tab: 'home'),
       ),
     );
   }
