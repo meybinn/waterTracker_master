@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
 
 import 'package:water_tracker/features/setup_profile_screen.dart';
+import 'package:water_tracker/intake_provider.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -75,6 +77,8 @@ class _SignupScreenState extends State<SignupScreen> {
         builder: (context) => const SetupProfileScreen(),
       ),
     );
+
+    context.read<IntakeProvider>().setUsername(username);
   }
 
   void onClearTap() {

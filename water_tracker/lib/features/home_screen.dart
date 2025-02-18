@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
 import 'package:water_tracker/intake_provider.dart';
@@ -17,9 +18,6 @@ class _HomeScreenState extends State<HomeScreen>
   late AnimationController _controller;
   late Animation<double> _animation;
 
-  final int intakeGoal = 2200;
-  int intakeReal = 0;
-
   DateTime now = DateTime.now();
   String date = DateFormat('MMMM d, yyyy').format(DateTime.now());
 
@@ -31,7 +29,9 @@ class _HomeScreenState extends State<HomeScreen>
           ..repeat(reverse: true);
     _animation = Tween(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    )..addListener(() {
+        setState(() {}); // UI 강제 업데이트
+      });
   }
 
   @override
@@ -42,6 +42,9 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
+    int intakeGoal = context.watch<IntakeProvider>().intakeGoal;
+    int intakeReal = context.watch<IntakeProvider>().totalIntake;
+
     double outerConHeight = MediaQuery.of(context).size.height * 0.4 + 60;
     double actualIntakeHeight = outerConHeight * (intakeReal / intakeGoal);
 
@@ -141,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen>
                 Column(
                   children: [
                     Text(
-                      "${(intakeReal / intakeGoal * 100).floor()}%",
+                      "${context.watch<IntakeProvider>().calcul} %",
                       style: GoogleFonts.righteous(
                         fontSize: Sizes.size28,
                         color: Color(0XFF7C7C7C),

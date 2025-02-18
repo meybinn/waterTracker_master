@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
+import 'package:water_tracker/features/main_navigation/main_navigation_screen.dart';
 import 'package:water_tracker/features/set_up/setUp.dart';
+import 'package:water_tracker/intake_provider.dart';
+import 'package:water_tracker/providers/set_up_goal_screen.dart';
 import 'package:water_tracker/setting/setting_screen.dart';
 
 class SetupProfileScreen extends StatefulWidget {
@@ -67,15 +71,12 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => SettingScreen(
-            gender: gender, 
-            age: age, 
-            weight: weight, 
-            height: height,
-            ),
+          builder: (context) => SetUpGoalScreen(),
         ),
       );
     }
+
+    context.read<IntakeProvider>().setString(gender, age, weight, height);
   }
 
   String? isGenderValid() {

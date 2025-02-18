@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
 import 'package:water_tracker/features/main_navigation/main_navigation_screen.dart';
+import 'package:water_tracker/intake_provider.dart';
 
 class SettingScreen extends StatefulWidget {
-  final String gender;
-  final String age;
-  final String height;
-  final String weight;
-
-  const SettingScreen(
-      {super.key,
-      this.gender = '',
-      this.age = '',
-      this.height = '',
-      this.weight = ''});
+  const SettingScreen({
+    super.key,
+  });
 
   @override
   State<SettingScreen> createState() => _SettingScreenState();
@@ -43,10 +37,11 @@ class _SettingScreenState extends State<SettingScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Gaps.v20,
             Icon(
               Icons.account_circle_outlined,
               size: 120,
-              color: Color(0XFF7C7C7C),
+              color: Color(0XCC7C7C7C),
             ),
             Gaps.v5,
             Text(
@@ -64,7 +59,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 Column(
                   children: [
                     Text(
-                      widget.gender,
+                      context.read<IntakeProvider>().gender,
                       style: GoogleFonts.scheherazadeNew(
                         color: Color(0XFF7C7C7C),
                         fontSize: Sizes.size28,
@@ -85,7 +80,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      widget.age,
+                      context.read<IntakeProvider>().age,
                       style: GoogleFonts.scheherazadeNew(
                         color: Color(0XFF7C7C7C),
                         fontSize: Sizes.size28,
@@ -111,7 +106,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 Column(
                   children: [
                     Text(
-                      widget.height,
+                      context.read<IntakeProvider>().height,
                       style: GoogleFonts.scheherazadeNew(
                         color: Color(0XFF7C7C7C),
                         fontSize: Sizes.size28,
@@ -132,7 +127,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      widget.weight,
+                      context.read<IntakeProvider>().weight,
                       style: GoogleFonts.scheherazadeNew(
                         color: Color(0XFF7C7C7C),
                         fontSize: Sizes.size28,
@@ -159,7 +154,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   children: [
                     Text(
                       // widget.intakeWater,
-                      "2000",
+                      "${context.read<IntakeProvider>().intakeGoal}",
                       style: GoogleFonts.scheherazadeNew(
                         color: Color(0XFF7C7C7C),
                         fontSize: Sizes.size28,
@@ -178,7 +173,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ],
             ),
-            Gaps.v28,
+            Gaps.v40,
             Divider(
               color: Color(0XFF7C7C7C),
               thickness: 1,

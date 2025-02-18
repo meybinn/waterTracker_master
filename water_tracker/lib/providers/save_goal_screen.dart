@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
+import 'package:water_tracker/intake_provider.dart';
 
 class SaveGoalScreen extends StatefulWidget {
   const SaveGoalScreen({
@@ -262,6 +264,10 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                 ElevatedButton(
                   onPressed: () {
                     Navigator.pop(context);
+
+                    // context
+                    //     .read<IntakeProvider>()
+                    //     .updateGoal(intakeGoal, _interval);
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(150, 60),
@@ -288,7 +294,7 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                       color: Color(0XFF828282),
                       fontWeight: FontWeight.bold,
                       fontSize: Sizes.size20,
-                    ), 
+                    ),
                   ),
                 ),
               ],
