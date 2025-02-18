@@ -143,7 +143,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     ),
                   ],
                 ),
-              ], 
+              ],
             ),
             Gaps.v24,
             Row(
@@ -171,7 +171,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ],
             ),
-            Gaps.v40,
+            Gaps.v80,
             Divider(
               color: Color(0XFF7C7C7C),
               thickness: 1,
@@ -201,7 +201,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ],
             ),
-            Gaps.v52,
+            Gaps.v28,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
