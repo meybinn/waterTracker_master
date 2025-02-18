@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -18,10 +20,12 @@ class _HomeScreenState extends State<HomeScreen>
   late AnimationController _controller;
   late Animation<double> _animation;
 
+  Timer? _timer;
+  Duration _timeRemaining = Duration.zero;
+
   DateTime now = DateTime.now();
   String date = DateFormat('MMMM d, yyyy').format(DateTime.now());
-
-  bool isStop = false;
+  
 
   @override
   void initState() {
@@ -32,33 +36,40 @@ class _HomeScreenState extends State<HomeScreen>
     _animation = Tween(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     )..addListener(() {
-        if (context.read<IntakeProvider>().totalIntake >=
-            context.read<IntakeProvider>().intakeGoal) {
-          _controller.stop();
-
-          if (mounted) {
-            showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: Text("achieve!!"),
-                content: Text("Congratulations! You did!"),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: Text("OK"),
-                  ),
-                ],
-              ),
-            );
-          }
-        }
         setState(() {}); // UI 강제 업데이트
       });
+      _startCoundown();
+  }
+
+  void _startCoundown(){
+    _timer?.cancel();
+
+    final intakeProvider = context.read<IntakeProvider>();
+    int interval = intakeProvider.interval;
+
+    DateTime now = DateTime.now();
+    DateTime nextReminder = now.add(Duration(hours: interval));
+
+    _timeRemaining = nextReminder.difference(now);
+
+    _timer = Timer.periodic(
+      Duration(seconds: 1), (timer){
+        if(_timeRemaining.inSeconds > 0) {
+          setState(() {
+            _timeRemaining -= Duration(seconds: 1);
+          });
+        } else{
+          timer.cancel();
+          _startCoundown();
+        }
+      } 
+    );
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    _timer?.cancel();
     super.dispose();
   }
 
@@ -69,7 +80,10 @@ class _HomeScreenState extends State<HomeScreen>
 
     double outerConHeight = MediaQuery.of(context).size.height * 0.4 + 60;
     double actualIntakeHeight = outerConHeight * (intakeReal / intakeGoal);
-    actualIntakeHeight = actualIntakeHeight.clamp(0, outerConHeight);
+
+    String formatCountdown = "${_timeRemaining.inHours.toString().padLeft(2, '0')}:"          //카운트다운 시간 형식
+            "${(_timeRemaining.inMinutes % 60).toString().padLeft(2, '0')}:"
+            "${(_timeRemaining.inSeconds % 60).toString().padLeft(2, '0')}";
 
     return Scaffold(
       body: Padding(
@@ -124,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen>
                 Container(
                   alignment: Alignment.center,
                   width: 220,
-                  height: outerConHeight + 12,
+                  height: outerConHeight,
                   decoration: BoxDecoration(
                     color: Color(0x507C7C7C),
                     border: Border.all(
@@ -144,7 +158,10 @@ class _HomeScreenState extends State<HomeScreen>
                     height: actualIntakeHeight,
                     decoration: BoxDecoration(
                       color: Color.fromARGB(200, 255, 255, 255),
-                      borderRadius: BorderRadius.all(Radius.circular(22)),
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(22),
+                        bottomRight: Radius.circular(22),
+                      ),
                     ),
                   ),
                 ),
@@ -183,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen>
                 Column(
                   children: [
                     Text(
-                      "0:28:42",
+                      formatCountdown,
                       style: GoogleFonts.righteous(
                         fontSize: Sizes.size28,
                         color: Color(0XFF7C7C7C),
