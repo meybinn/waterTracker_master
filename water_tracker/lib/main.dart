@@ -6,6 +6,7 @@ import 'package:water_tracker/features/setup_profile_screen.dart';
 import 'package:water_tracker/features/signIn_screen.dart';
 import 'package:water_tracker/features/signup_screen.dart';
 import 'package:water_tracker/features/start_screen.dart';
+import 'package:water_tracker/setting/setting_screen.dart';
 
 void main() {
   runApp(const WaterTracker());
@@ -28,12 +29,13 @@ class WaterTracker extends StatelessWidget {
         ),
       ),
       // home: HistoryScreen(),
-      home: MainNavigationScreen(tab: "add"),
+      // home: MainNavigationScreen(tab: "add"),
       // home: HomeScreen(),
       // home: SigninScreen(),
       // home: StartScreen(),
       // home: SignupScreen(),
       // home: const SetupProfileScreen(),
+      home: SettingScreen(),
     );
   }
 }

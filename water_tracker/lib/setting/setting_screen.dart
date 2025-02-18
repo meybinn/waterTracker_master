@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
 import 'package:water_tracker/features/main_navigation/main_navigation_screen.dart';
+import 'package:water_tracker/setting/dialog_logout.dart';
 
 class SettingScreen extends StatefulWidget {
   final String gender;
@@ -236,7 +237,7 @@ class _SettingScreenState extends State<SettingScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GestureDetector(
-                  onTap: _logOutTap,
+                  onTap: () => showLogoutDialog(context),
                   child: Text(
                     "Log out",
                     style: GoogleFonts.scheherazadeNew(
