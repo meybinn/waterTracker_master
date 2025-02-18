@@ -143,7 +143,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     ),
                   ],
                 ),
-              ], 
+              ],
             ),
             Gaps.v24,
             Row(
@@ -171,7 +171,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ],
             ),
-            Gaps.v40,
+            Gaps.v80,
             Divider(
               color: Color(0XFF7C7C7C),
               thickness: 1,
@@ -201,7 +201,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ],
             ),
-            Gaps.v52,
+            Gaps.v28,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -211,14 +211,13 @@ class _SettingScreenState extends State<SettingScreen> {
                     "Log out",
                     style: GoogleFonts.scheherazadeNew(
                       color: Color(0XFFEB6F6F),
-                      fontSize: Sizes.size26 + Sizes.size4,
+                      fontSize: Sizes.size34,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
               ],
             ),
-            Gaps.v8,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -226,7 +225,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   "really want to log out?",
                   style: GoogleFonts.scheherazadeNew(
                     color: Color(0XFF9B9CA4),
-                    fontSize: Sizes.size26,
+                    fontSize: Sizes.size18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
