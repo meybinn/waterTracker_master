@@ -6,6 +6,8 @@ import 'package:water_tracker/features/add_intake.dart';
 import 'package:water_tracker/features/history_screen.dart';
 import 'package:water_tracker/features/home_screen.dart';
 import 'package:water_tracker/features/main_navigation/nev_tab.dart';
+import 'package:water_tracker/providers/save_goal_screen.dart';
+import 'package:water_tracker/setting/setting_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   final String tab;
@@ -62,13 +64,13 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           // setting goal
           Offstage(
             offstage: _selectedIndex != 3,
-            child: Container(),
+            child: SaveGoalScreen(),
           ),
 
           // setting
           Offstage(
             offstage: _selectedIndex != 4,
-            child: Container(),
+            child: SettingScreen(),
           ),
         ],
       ),
