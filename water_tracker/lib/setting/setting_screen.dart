@@ -146,7 +146,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     ),
                   ],
                 ),
-              ],
+              ], 
             ),
             Gaps.v24,
             Row(
@@ -155,7 +155,6 @@ class _SettingScreenState extends State<SettingScreen> {
                 Column(
                   children: [
                     Text(
-                      // widget.intakeWater,
                       "${context.read<IntakeProvider>().intakeGoal}",
                       style: GoogleFonts.scheherazadeNew(
                         color: Color(0XFF7C7C7C),
@@ -205,30 +204,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ],
             ),
-            Gaps.v20,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Text(
-                  "Stop when 100%   ",
-                  style: GoogleFonts.scheherazadeNew(
-                    color: Color(0XFF7C7C7C),
-                    fontSize: Sizes.size28 + Sizes.size2,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Switch(
-                  value: isFull,
-                  onChanged: (bool value) {
-                    setState(() {
-                      isFull = value;
-                    });
-                  },
-                  activeColor: Color(0XFF4C89B2),
-                ),
-              ],
-            ),
-            Gaps.v36,
+            Gaps.v52,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
