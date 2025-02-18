@@ -16,7 +16,8 @@ class SaveGoalScreen extends StatefulWidget {
 }
 
 class _SaveGoalScreenState extends State<SaveGoalScreen> {
-  int intakeGoal = 2200;
+  // int intakeGoal = 2200;
+
   TimeOfDay? fromTime;
   TimeOfDay? toTime;
   int _interval = 1;
@@ -24,17 +25,17 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
 
   void _increaseGoal() {
     setState(() {
-      intakeGoal += 10;
-      _sliderValue = intakeGoal.toDouble();
+      int newValue = context.watch<IntakeProvider>().intakeGoal + 10;
+      context.watch<IntakeProvider>().updateGoal(newValue, _interval);
+      _sliderValue = newValue.toDouble();
     });
   }
 
   void _decreaseGoal() {
     setState(() {
-      if (intakeGoal > 10) {
-        intakeGoal -= 10;
-        _sliderValue = intakeGoal.toDouble();
-      }
+      int newValue = context.watch<IntakeProvider>().intakeGoal - 10;
+      context.watch<IntakeProvider>().updateGoal(newValue, _interval);
+      _sliderValue = newValue.toDouble();
     });
   }
 
@@ -58,6 +59,7 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
   @override
   Widget build(BuildContext context) {
     final scaffoldBackgroundColor = Theme.of(context).scaffoldBackgroundColor;
+    int intakeGoal = context.watch<IntakeProvider>().intakeGoal;
 
     return Scaffold(
       backgroundColor: scaffoldBackgroundColor,
@@ -122,7 +124,8 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                 SizedBox(
                   width: 200,
                   child: Slider(
-                      value: _sliderValue,
+                      // value: _sliderValue,
+                      value: intakeGoal.toDouble(),
                       min: 0,
                       max: 5000,
                       divisions: 50,
@@ -130,8 +133,9 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                       inactiveColor: Colors.white,
                       onChanged: (double newValue) {
                         setState(() {
-                          _sliderValue = newValue;
-                          intakeGoal = _sliderValue.toInt();
+                          context
+                              .read<IntakeProvider>()
+                              .updateGoal(newValue.toInt(), _interval);
                         });
                       }),
                 ),
@@ -263,11 +267,14 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pop(context);
-
-                    // context
-                    //     .read<IntakeProvider>()
-                    //     .updateGoal(intakeGoal, _interval);
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text("your goal is modified"),
+                        );
+                      },
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: Size(150, 60),

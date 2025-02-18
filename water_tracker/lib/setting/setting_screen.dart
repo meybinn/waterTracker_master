@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
-import 'package:water_tracker/features/main_navigation/main_navigation_screen.dart';
 import 'package:water_tracker/setting/dialog_logout.dart';
 import 'package:water_tracker/intake_provider.dart';
-
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({

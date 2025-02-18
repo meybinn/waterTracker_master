@@ -21,6 +21,8 @@ class _HomeScreenState extends State<HomeScreen>
   DateTime now = DateTime.now();
   String date = DateFormat('MMMM d, yyyy').format(DateTime.now());
 
+  bool isStop = false;
+
   @override
   void initState() {
     super.initState();
@@ -30,6 +32,26 @@ class _HomeScreenState extends State<HomeScreen>
     _animation = Tween(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     )..addListener(() {
+        if (context.read<IntakeProvider>().totalIntake >=
+            context.read<IntakeProvider>().intakeGoal) {
+          _controller.stop();
+
+          if (mounted) {
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: Text("achieve!!"),
+                content: Text("Congratulations! You did!"),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: Text("OK"),
+                  ),
+                ],
+              ),
+            );
+          }
+        }
         setState(() {}); // UI 강제 업데이트
       });
   }
@@ -47,6 +69,7 @@ class _HomeScreenState extends State<HomeScreen>
 
     double outerConHeight = MediaQuery.of(context).size.height * 0.4 + 60;
     double actualIntakeHeight = outerConHeight * (intakeReal / intakeGoal);
+    actualIntakeHeight = actualIntakeHeight.clamp(0, outerConHeight);
 
     return Scaffold(
       body: Padding(
@@ -101,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen>
                 Container(
                   alignment: Alignment.center,
                   width: 220,
-                  height: outerConHeight,
+                  height: outerConHeight + 12,
                   decoration: BoxDecoration(
                     color: Color(0x507C7C7C),
                     border: Border.all(
@@ -121,10 +144,7 @@ class _HomeScreenState extends State<HomeScreen>
                     height: actualIntakeHeight,
                     decoration: BoxDecoration(
                       color: Color.fromARGB(200, 255, 255, 255),
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(22),
-                        bottomRight: Radius.circular(22),
-                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(22)),
                     ),
                   ),
                 ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
 
 class DialogLogout extends StatelessWidget {
@@ -14,17 +13,16 @@ class DialogLogout extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       title: Align(
-          alignment: Alignment.centerLeft,
-          child: 
-            Text(
-              "Log Out",
-              style: GoogleFonts.scheherazadeNew(
-                color: Colors.black,
-                fontSize: Sizes.size22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+        alignment: Alignment.centerLeft,
+        child: Text(
+          "Log Out",
+          style: GoogleFonts.scheherazadeNew(
+            color: Colors.black,
+            fontSize: Sizes.size22,
+            fontWeight: FontWeight.bold,
+          ),
         ),
+      ),
       content: Text(
         "Are you sure want to log out?",
         style: GoogleFonts.scheherazadeNew(
@@ -74,7 +72,7 @@ class DialogLogout extends StatelessWidget {
                 style: GoogleFonts.scheherazadeNew(
                   fontSize: Sizes.size20,
                 ),
-                ),
+              ),
             ),
           ],
         ),

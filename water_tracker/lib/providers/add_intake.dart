@@ -210,7 +210,7 @@ class _AddIntakeState extends State<AddIntake> {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: Text("Your water intake saved!"),
+                            title: Text("Your water intake saved"),
                           );
                         });
                   },

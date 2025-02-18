@@ -24,7 +24,6 @@ class _AddIntakeState extends State<AddIntake> {
   @override
   Widget build(BuildContext context) {
     int totalIntake = context.watch<IntakeProvider>().totalIntake; // 전역변수
-    int preIntake = 0;
 
     return Scaffold(
         body: SafeArea(
@@ -91,10 +90,7 @@ class _AddIntakeState extends State<AddIntake> {
                     children: [
                       IconButton(
                         onPressed: () {
-                          context.read<IntakeProvider>().updateIntake(
-                                context.read<IntakeProvider>().totalIntake +
-                                    190,
-                              );
+                          context.read<IntakeProvider>().updateIntake(150);
                         },
                         icon: FaIcon(
                           FontAwesomeIcons.whiskeyGlass,
@@ -127,10 +123,7 @@ class _AddIntakeState extends State<AddIntake> {
                     children: [
                       IconButton(
                         onPressed: () {
-                          context.read<IntakeProvider>().updateIntake(
-                                context.read<IntakeProvider>().totalIntake +
-                                    500,
-                              );
+                          context.read<IntakeProvider>().updateIntake(500);
                         },
                         icon: FaIcon(
                           FontAwesomeIcons.bottleWater,
