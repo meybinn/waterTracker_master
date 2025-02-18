@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
 import 'package:water_tracker/features/set_up/setUp.dart';
+import 'package:water_tracker/setting/setting_screen.dart';
 
 class SetupProfileScreen extends StatefulWidget {
   const SetupProfileScreen({super.key});
@@ -66,7 +67,12 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => Container(),
+          builder: (context) => SettingScreen(
+            gender: gender, 
+            age: age, 
+            weight: weight, 
+            height: height,
+            ),
         ),
       );
     }
