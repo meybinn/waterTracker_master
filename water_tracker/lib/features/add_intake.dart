@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
+import 'package:water_tracker/intake_provider.dart';
 
 // save해서 다른 전역 변수에 저장하는 기능 추가
 // save 후 다시 들어와서 reset할 때의 변수 값
@@ -16,8 +18,8 @@ class AddIntake extends StatefulWidget {
 }
 
 class _AddIntakeState extends State<AddIntake> {
-  int initialTotalIntake = 500; // 여기 저장된 후의 intake 변수 넣기
-  int totalIntake = 500;
+  int initialTotalIntake = 0; // 여기 저장된 후의 intake 변수 넣기
+  int totalIntake = 0;
   int intakeReal = 0;
 
   @override
@@ -202,6 +204,10 @@ class _AddIntakeState extends State<AddIntake> {
                     setState(() {
                       intakeReal = 0;
                     });
+
+                    Provider.of<IntakeProvider>(context, listen: false)
+                        .updateIntake(totalIntake);
+
                     showDialog(
                         context: context,
                         builder: (context) {

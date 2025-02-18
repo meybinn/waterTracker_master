@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
+import 'package:water_tracker/intake_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen>
   late Animation<double> _animation;
 
   final int intakeGoal = 2200;
-  final double intakeReal = 1500;
+  int intakeReal = 0;
 
   DateTime now = DateTime.now();
   String date = DateFormat('MMMM d, yyyy').format(DateTime.now());
