@@ -41,8 +41,8 @@ class DatabaseHelper {
           await db.execute('''
           CREATE TABLE water_intake(
           id INTEGER PRIMARY KEY AUTOINCREMENT,
-          user_id TEXT,
-          TOtalIntake INTEGER,
+          user_id INTEGER,
+          TotalIntake INTEGER,
           timestamp TEXT,
           FOREIGN KEY(user_id) REFERENCES users(id) on delete cascade
           );
@@ -51,7 +51,7 @@ class DatabaseHelper {
           await db.execute('''
           CREATE TABLE setting (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
-          user_id TEXT ,
+          user_id INTEGER ,
           interval INTEGER,
           from_time TEXT,
           to_time TEXT,
@@ -66,7 +66,7 @@ class DatabaseHelper {
     }
   }
 
-  Future<int> getTotalIntake(String userId) async {
+  Future<int> getTotalIntake(int userId) async {
     final db = await database;
     final List<Map<String, dynamic>> result = await db.query(
       'water_intake',
@@ -79,7 +79,8 @@ class DatabaseHelper {
     return total;
   }
 
-  Future<List<Map<String, dynamic>>> getHistory(String userId) async {
+// history screen 닫기기
+  Future<List<Map<String, dynamic>>> getHistory(int userId) async {
     final db = await database;
     return await db.query(
       'water_intake',
@@ -89,10 +90,42 @@ class DatabaseHelper {
     );
   }
 
+// DB 닫기기
   Future<void> closeDatabase() async {
     final db = _database;
     if (db != null) {
       await db.close();
     }
+  }
+
+// 물 섭취 기록
+  Future<int> insertWaterIntake(int userId, int amount) async {
+    final db = await database;
+    return await db.insert(
+      'water_intake',
+      {
+        'user_id': userId,
+        'TotalIntake': amount,
+        'timestamp': DateTime.now().toIso8601String(),
+      },
+      // 매개변수를 뺴고 현재 시간이 저장되도록 변경
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+// 오늘 섭취량
+  Future<int> getTodayTotalIntake(int userId) async {
+    final db = await database;
+    String today =
+        DateTime.now().toIso8601String().split('T')[0]; // 오늘 날짜만 가져오기
+    final List<Map<String, dynamic>> result = await db.query(
+      'water_intake',
+      where: 'user_id = ? AND timestamp LIKE ?',
+      whereArgs: [userId, '$today%'], // 오늘 날짜로 시작하는 데이터만 필터링
+    );
+
+    int total =
+        result.fold(0, (sum, item) => sum + (item['TotalIntake'] as int));
+    return total;
   }
 }
