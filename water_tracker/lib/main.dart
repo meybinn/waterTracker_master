@@ -6,6 +6,7 @@ import 'package:water_tracker/intake_provider.dart';
 import 'package:water_tracker/notification/notification.dart';
 
 void main() {
+  
   runApp(
     ChangeNotifierProvider(
       create: (context) => IntakeProvider(),
