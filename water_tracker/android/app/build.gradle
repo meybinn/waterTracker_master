@@ -7,8 +7,8 @@ plugins {
 
 android {
     namespace = "com.example.water_tracker"
-    compileSdk = flutter.compileSdkVersionbuildscript 
-    ndkVersion "25.1.8937393"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion "28.0.13004108"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
