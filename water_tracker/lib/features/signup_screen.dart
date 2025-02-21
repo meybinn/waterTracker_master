@@ -74,7 +74,8 @@ class _SignupScreenState extends State<SignupScreen> {
     if (_isEmailValid() != null || email.isEmpty || username.isEmpty) return;
 
     try{
-      await DatabaseHelper.instance.insertUser(username, email, password);
+      int userId = await DatabaseHelper.instance.insertUser(username, email, password,);
+      print("User add with ID: $userId");
 
       Navigator.push(
       context,
@@ -82,6 +83,7 @@ class _SignupScreenState extends State<SignupScreen> {
         builder: (context) => const SetupProfileScreen(),
       ),
     );
+
 
     context.read<IntakeProvider>().setUsername(username);
     } catch (e) {
