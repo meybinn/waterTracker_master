@@ -1,14 +1,16 @@
+
 import 'dart:io';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:uuid/uuid.dart';
 
+
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._internal();
   factory DatabaseHelper() => instance;
   static Database? _database;
- 
+
   DatabaseHelper._internal();
 
 // database 초기화
@@ -17,7 +19,8 @@ class DatabaseHelper {
     _database = await getDatabase();
     return _database!;
   }
-  // DB 구축
+
+// DB 구축
   Future<Database> getDatabase() async {
     try {
       Directory dir = await getApplicationDocumentsDirectory();
@@ -41,13 +44,13 @@ class DatabaseHelper {
 
           await db.execute('''
           CREATE TABLE water_intake(
-          // id INTEGER PRIMARY KEY AUTOINCREMENT,
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
           user_id TEXT,
           amount INTEGER,
           timestamp TEXT,
           FOREIGN KEY(user_id) REFERENCES users(id) on delete cascade
           );
-           ''');
+        ''');
 
           await db.execute('''
           CREATE TABLE setting (
@@ -63,27 +66,28 @@ class DatabaseHelper {
         },
       );
     } catch (e) {
-    print("Error in $e during database creation!");
+      print("Error in $e during database creation!");
       rethrow;
     }
   }
-  // SignUpScreen 기능 : insert
-  Future<int> insertUser(String username, String email, String password) async {
+
+// SignUpScreen 기능 : insert
+  Future<int> insertUser(String id, String username, String password) async {
     final db = await database;
     var uuid = Uuid();
     String userId = uuid.v4();
     return await db.insert(
       'users',
       {
+        'id': id,
         'username': username,
-        'email': email,
         'password': password,
       },
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
-// SignInScreen 기능 : check
+// SignUpScreen 기능 : check email&password
   Future<Map<String, dynamic>?> checkUser(String email, String password) async {
     final db = await database;
     final List<Map<String, dynamic>> result = await db.query(
@@ -155,7 +159,7 @@ class DatabaseHelper {
     }
   }
 
-// home screen 기능 : 변수 값 표기
+// home screen 기능 : intakeGoal&amount&timestamp 표기
   Future<Map<String, dynamic>?> getHomeData(String userId) async {
     final db = await database;
 
@@ -176,7 +180,8 @@ class DatabaseHelper {
       where: 'user_id = ?',
       whereArgs: [userId],
     );
-     if (goalResult.isNotEmpty) {
+
+    if (goalResult.isNotEmpty) {
       return {
         'intakeGoal': goalResult.first['intakeGoal'],
         'totalIntake': totalIntake,
@@ -185,7 +190,8 @@ class DatabaseHelper {
 
     return null;
   }
- // history screen : 변수 값 표기
+
+// history screen : timestamp&amount 표기
   Future<List<Map<String, dynamic>>> getHistory(String userId) async {
     final db = await database;
     return await db.query(
@@ -195,24 +201,25 @@ class DatabaseHelper {
       orderBy: 'timestamp DESC',
     );
   }
-  // add intake screen 기능 : update
+
+// add intake screen 기능 : update
   Future<int> addWaterIntake(String userId, int amount) async {
     final db = await database;
     return await db.insert(
       'water_intake',
       {
         'user_id': userId,
-      'amount': amount,
+        'amount': amount,
         'timestamp': DateTime.now().toIso8601String(),
       },
-        );
+    );
   }
 
-  // saveGoalScreen 기능 : update
+// saveGoalScreen 기능 : update
   Future<int> updateGoal(String userId, int intakeGoal, String fromTime,
       String toTime, int interval) async {
-      final db = await database;
-       return await db.update(
+    final db = await database;
+    return await db.update(
       'setting',
       {
         'intakeGoal': intakeGoal,
@@ -224,7 +231,8 @@ class DatabaseHelper {
       whereArgs: [userId],
     );
   }
-  // setting screen 기능 : 설정 정보 표기
+
+// setting screen 기능 : gender&age&weight&height 표기
   Future<Map<String, dynamic>?> getUserSettings(String userId) async {
     final db = await database;
     final List<Map<String, dynamic>> result = await db.query(
@@ -235,24 +243,24 @@ class DatabaseHelper {
     return result.isNotEmpty ? result.first : null;
   }
 
-// //setting screen 기능: 업데이트
-//   Future<int> updateUserSettings(String userId, int age, String gender,
-//       double weight, double height, int intakeGoal) async {
-//     final db = await database;
-//     return await db.update(
-//       'users',
-//       {
-//         'age': age,
-//         'gender': gender,
-//         'weight': weight,
-//         'height': height,
-//       },
-//       where: 'id = ?',
-//       whereArgs: [userId],
-//     );
-//   }
+// setting screen 기능: 업데이트
+  // Future<int> updateUserSettings(String userId, int age, String gender,
+  //     double weight, double height, int intakeGoal) async {
+  //   final db = await database;
+  //   return await db.update(
+  //     'users',
+  //     {
+  //       'age': age,
+  //       'gender': gender,
+  //       'weight': weight,
+  //       'height': height,
+  //     },
+  //     where: 'id = ?',
+  //     whereArgs: [userId],
+  //   );
+  // }
 
-// //전체 intake  get
+// // 전체 intake  get
 //   Future<int> getTotalIntake(int userId) async {
 //     final db = await database;
 //     final List<Map<String, dynamic>> result = await db.query(
@@ -266,7 +274,7 @@ class DatabaseHelper {
 //     return total;
 //   }
 
-// //history screen 닫기
+// // history screen 닫기
 //   Future<List<Map<String, dynamic>>> getHistory(int userId) async {
 //     final db = await database;
 //     return await db.query(
@@ -277,7 +285,7 @@ class DatabaseHelper {
 //     );
 //   }
 
-// //DB 닫기
+// // DB 닫기
 //   Future<void> closeDatabase() async {
 //     final db = _database;
 //     if (db != null) {
@@ -285,7 +293,7 @@ class DatabaseHelper {
 //     }
 //   }
 
-// //물 섭취 기록 insert
+// // 물 섭취 기록 insert
 //   Future<int> insertWaterIntake(int userId, int amount) async {
 //     final db = await database;
 //     return await db.insert(
@@ -316,7 +324,7 @@ class DatabaseHelper {
 //     return total;
 //   }
 
-// //setting 화면 속 get
+//   // setting 화면 속 get
 //   Future<Map<String, dynamic>?> getUserSetting(int userId) async {
 //     final db = await database;
 //     final List<Map<String, dynamic>> result = await db.query(
@@ -329,6 +337,5 @@ class DatabaseHelper {
 //       return result.first; // 첫 번째 결과 반환
 //     }
 //     return null; // 데이터가 없으면 null 반환
-//   };
-// };
+//   }
 }
