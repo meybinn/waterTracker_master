@@ -82,7 +82,7 @@ class DatabaseHelper {
     );
   }
 
-// SignUpScreen 기능 : check
+// SignUpScreen 기능 : check email&password
   Future<Map<String, dynamic>?> checkUser(String email, String password) async {
     final db = await database;
     final List<Map<String, dynamic>> result = await db.query(
@@ -154,7 +154,7 @@ class DatabaseHelper {
     }
   }
 
-// home screen 기능 : 변수 값 표기
+// home screen 기능 : intakeGoal&amount&timestamp 표기
   Future<Map<String, dynamic>?> getHomeData(String userId) async {
     final db = await database;
 
@@ -186,7 +186,7 @@ class DatabaseHelper {
     return null;
   }
 
-// history screen : 변수 값 표기
+// history screen : timestamp&amount 표기
   Future<List<Map<String, dynamic>>> getHistory(String userId) async {
     final db = await database;
     return await db.query(
@@ -227,7 +227,7 @@ class DatabaseHelper {
     );
   }
 
-// setting screen 기능 : 설정 정보 표기
+// setting screen 기능 : gender&age&weight&height 표기
   Future<Map<String, dynamic>?> getUserSettings(String userId) async {
     final db = await database;
     final List<Map<String, dynamic>> result = await db.query(
