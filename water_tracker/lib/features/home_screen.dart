@@ -27,6 +27,8 @@ class _HomeScreenState extends State<HomeScreen>
   DateTime now = DateTime.now();
   String date = DateFormat('MMMM d, yyyy').format(DateTime.now());
 
+  bool isStop = false;
+
   @override
   void initState() {
     super.initState();
@@ -38,6 +40,28 @@ class _HomeScreenState extends State<HomeScreen>
     )..addListener(() {
         setState(() {}); // UI 강제 업데이트
       });
+
+    if (context.read<IntakeProvider>().totalIntake >=
+        context.read<IntakeProvider>().intakeGoal) {
+      _controller.stop();
+
+      if (mounted) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text("achieve!!"),
+            content: Text("Congratulations! You did!"),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text("OK"),
+              ),
+            ],
+          ),
+        );
+      }
+    }
+
     _startCoundown();
   }
 
@@ -83,6 +107,7 @@ class _HomeScreenState extends State<HomeScreen>
 
     double outerConHeight = MediaQuery.of(context).size.height * 0.4 + 60;
     double actualIntakeHeight = outerConHeight * (intakeReal / intakeGoal);
+    actualIntakeHeight = actualIntakeHeight.clamp(0, outerConHeight);
 
     String formatCountdown =
         "${_timeRemaining.inHours.toString().padLeft(2, '0')}:" //카운트다운 시간 형식
@@ -159,13 +184,10 @@ class _HomeScreenState extends State<HomeScreen>
                   child: Container(
                     alignment: Alignment.topCenter,
                     width: 207,
-                    height: actualIntakeHeight,
+                    height: actualIntakeHeight - 10,
                     decoration: BoxDecoration(
                       color: Color.fromARGB(200, 255, 255, 255),
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(22),
-                        bottomRight: Radius.circular(22),
-                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(22)),
                     ),
                   ),
                 ),
