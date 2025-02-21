@@ -6,6 +6,7 @@ import 'package:water_tracker/features/signup_screen.dart';
 import 'package:water_tracker/features/start_screen.dart';
 
 import 'package:water_tracker/intake_provider.dart';
+import 'package:water_tracker/notification/notification.dart';
 
 void main() {
   runApp(
@@ -16,8 +17,23 @@ void main() {
   );
 }
 
-class WaterTracker extends StatelessWidget {
+class WaterTracker extends StatefulWidget {
   const WaterTracker({super.key});
+
+  @override
+  State<WaterTracker> createState() => _WaterTrackerState();
+}
+
+class _WaterTrackerState extends State<WaterTracker> {
+  @override
+  void initState() {
+    FlutterLocalNotification.init();
+
+    Future.delayed(Duration(seconds: 3),
+        FlutterLocalNotification.requestNotificationPermission());
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
