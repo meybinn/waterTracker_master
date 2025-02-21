@@ -6,7 +6,6 @@ import 'package:water_tracker/intake_provider.dart';
 import 'package:water_tracker/notification/notification.dart';
 
 void main() {
-  
   runApp(
     ChangeNotifierProvider(
       create: (context) => IntakeProvider(),
@@ -46,6 +45,7 @@ class _WaterTrackerState extends State<WaterTracker> {
           color: Color(0xFFE0E6FE),
         ),
       ),
+
       home: MainNavigationScreen(tab: "setting"),
       // home: StartScreen(),
       // home: HistoryScreen(),
