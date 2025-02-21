@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:water_tracker/constant/sizes.dart';
+import 'package:water_tracker/features/start_screen.dart';
 
 class DialogLogout extends StatelessWidget {
   const DialogLogout({super.key});
@@ -55,7 +56,14 @@ class DialogLogout extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () => Navigator.pop(context, 'Log out'),
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StartScreen(),
+                  ),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0XFF4C89B2),
                 foregroundColor: Colors.white,
