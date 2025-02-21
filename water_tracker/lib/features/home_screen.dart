@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
 import 'package:water_tracker/intake_provider.dart';
+import 'package:water_tracker/notification/notification.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,7 +26,6 @@ class _HomeScreenState extends State<HomeScreen>
 
   DateTime now = DateTime.now();
   String date = DateFormat('MMMM d, yyyy').format(DateTime.now());
-  
 
   @override
   void initState() {
@@ -38,10 +38,10 @@ class _HomeScreenState extends State<HomeScreen>
     )..addListener(() {
         setState(() {}); // UI 강제 업데이트
       });
-      _startCoundown();
+    _startCoundown();
   }
 
-  void _startCoundown(){
+  void _startCoundown() {
     _timer?.cancel();
 
     final intakeProvider = context.read<IntakeProvider>();
@@ -52,18 +52,21 @@ class _HomeScreenState extends State<HomeScreen>
 
     _timeRemaining = nextReminder.difference(now);
 
-    _timer = Timer.periodic(
-      Duration(seconds: 1), (timer){
-        if(_timeRemaining.inSeconds > 0) {
-          setState(() {
-            _timeRemaining -= Duration(seconds: 1);
-          });
-        } else{
-          timer.cancel();
-          _startCoundown();
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (_timeRemaining.inSeconds > 0) {
+        setState(() {
+          _timeRemaining -= Duration(seconds: 1);
+        });
+
+// reminder가 2분 남았을 때 알림 보내기
+        if (_timeRemaining.inMinutes == 2 && _timeRemaining.inSeconds == 0) {
+          FlutterLocalNotification.showNotification(); // 알림 보내기
         }
-      } 
-    );
+      } else {
+        timer.cancel();
+        _startCoundown();
+      }
+    });
   }
 
   @override
@@ -81,9 +84,10 @@ class _HomeScreenState extends State<HomeScreen>
     double outerConHeight = MediaQuery.of(context).size.height * 0.4 + 60;
     double actualIntakeHeight = outerConHeight * (intakeReal / intakeGoal);
 
-    String formatCountdown = "${_timeRemaining.inHours.toString().padLeft(2, '0')}:"          //카운트다운 시간 형식
-            "${(_timeRemaining.inMinutes % 60).toString().padLeft(2, '0')}:"
-            "${(_timeRemaining.inSeconds % 60).toString().padLeft(2, '0')}";
+    String formatCountdown =
+        "${_timeRemaining.inHours.toString().padLeft(2, '0')}:" //카운트다운 시간 형식
+        "${(_timeRemaining.inMinutes % 60).toString().padLeft(2, '0')}:"
+        "${(_timeRemaining.inSeconds % 60).toString().padLeft(2, '0')}";
 
     return Scaffold(
       body: Padding(
