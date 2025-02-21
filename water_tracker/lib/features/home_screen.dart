@@ -12,7 +12,6 @@ import 'package:water_tracker/notification/notification.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -102,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen>
               children: [
                 Icon(
                   Icons.account_circle_outlined,
-                  size: 120,
+                  size: 90,
                   color: Color(0XFF7C7C7C),
                 ),
                 Gaps.h10,
@@ -120,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen>
                     Text(
                       date,
                       style: GoogleFonts.righteous(
-                        fontSize: Sizes.size20,
+                        fontSize: Sizes.size18,
                         color: Color(0XFF7C7C7C),
                       ),
                     ),
@@ -128,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               ],
             ),
-            Gaps.v20,
+            Gaps.v36,
             Text(
               "$intakeGoal ml",
               style: GoogleFonts.righteous(

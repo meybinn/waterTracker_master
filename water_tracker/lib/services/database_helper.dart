@@ -1,10 +1,7 @@
-
 import 'dart:io';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
-import 'package:uuid/uuid.dart';
-
 
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._internal();
@@ -35,7 +32,7 @@ class DatabaseHelper {
           username TEXT NOT NULL,
           email TEXT UNIQUE NOT NULL,
           password TEXT NOT NULL,
-          age INTEGER,
+          age INTEGER,   
           gender TEXT,
           weight REAL,
           height REAL
@@ -72,16 +69,13 @@ class DatabaseHelper {
   }
 
 // SignUpScreen 기능 : insert
-  Future<int> insertUser(String email, String username, String password) async {
+  Future<int> insertUser(String id, String username, String password) async {
     final db = await database;
-    var uuid = Uuid();
-    String userId = uuid.v4();
     return await db.insert(
       'users',
       {
-        'id': userId,
+        'id': id,
         'username': username,
-        'email': email,
         'password': password,
       },
       conflictAlgorithm: ConflictAlgorithm.replace,

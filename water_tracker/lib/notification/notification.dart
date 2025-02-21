@@ -9,7 +9,7 @@ class FlutterLocalNotification {
 // init 메소드
   static init() async {
     AndroidInitializationSettings androidInitializationSettings =
-        const AndroidInitializationSettings("");
+        const AndroidInitializationSettings("@mipmap/ic_launcher");
 
 // 먼저 false로 맞추고 추후 true로 변경하여 권한 요청할 때 사용
     DarwinInitializationSettings iosInitializationSettings =
