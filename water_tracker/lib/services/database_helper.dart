@@ -72,15 +72,16 @@ class DatabaseHelper {
   }
 
 // SignUpScreen 기능 : insert
-  Future<int> insertUser(String id, String username, String password) async {
+  Future<int> insertUser(String email, String username, String password) async {
     final db = await database;
     var uuid = Uuid();
     String userId = uuid.v4();
     return await db.insert(
       'users',
       {
-        'id': id,
+        'id': userId,
         'username': username,
+        'email': email,
         'password': password,
       },
       conflictAlgorithm: ConflictAlgorithm.replace,
