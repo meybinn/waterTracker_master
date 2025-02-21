@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:water_tracker/features/main_navigation/main_navigation_screen.dart';
 
-import 'package:water_tracker/features/signup_screen.dart';
-import 'package:water_tracker/features/start_screen.dart';
-
 import 'package:water_tracker/intake_provider.dart';
 
 void main() {
