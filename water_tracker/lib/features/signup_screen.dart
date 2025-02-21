@@ -7,6 +7,7 @@ import 'package:water_tracker/constant/sizes.dart';
 
 import 'package:water_tracker/features/setup_profile_screen.dart';
 import 'package:water_tracker/intake_provider.dart';
+import 'package:water_tracker/services/database_helper.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -69,9 +70,13 @@ class _SignupScreenState extends State<SignupScreen> {
     FocusScope.of(context).unfocus();
   }
 
-  void _onNextTap() {
+  void _onNextTap() async {
     if (_isEmailValid() != null || email.isEmpty || username.isEmpty) return;
-    Navigator.push(
+
+    try{
+      await DatabaseHelper.instance.insertUser(username, email, password);
+
+      Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => const SetupProfileScreen(),
@@ -79,6 +84,12 @@ class _SignupScreenState extends State<SignupScreen> {
     );
 
     context.read<IntakeProvider>().setUsername(username);
+    } catch (e) {
+      print("Error inserting user: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Error creating account. Try again!"),),);
+    }
+
   }
 
   void onClearTap() {
