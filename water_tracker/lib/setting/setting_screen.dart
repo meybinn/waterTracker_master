@@ -39,10 +39,13 @@ class _SettingScreenState extends State<SettingScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Gaps.v20,
-              Icon(
-                Icons.account_circle_outlined,
-                size: 120,
-                color: const Color(0XCC7C7C7C),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 12),
+                child: Icon(
+                  Icons.account_circle_outlined,
+                  size: 120,
+                  color: const Color(0XCC7C7C7C),
+                ),
               ),
               Gaps.v1,
               Text(
@@ -92,18 +95,21 @@ class _SettingScreenState extends State<SettingScreen> {
                     "Allow notification",
                     style: GoogleFonts.scheherazadeNew(
                       color: const Color(0XFF7C7C7C),
-                      fontSize: Sizes.size28,
+                      fontSize: Sizes.size24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Switch(
-                    value: isNotificationEnabled,
-                    onChanged: (bool value) {
-                      setState(() {
-                        isNotificationEnabled = value;
-                      });
-                    },
-                    activeColor: const Color(0XFF4C89B2),
+                  Transform.scale(
+                    scale: 0.8,
+                    child: Switch(
+                      value: isNotificationEnabled,
+                      onChanged: (bool value) {
+                        setState(() {
+                          isNotificationEnabled = value;
+                        });
+                      },
+                      activeColor: const Color(0XFF4C89B2),
+                    ),
                   ),
                 ],
               ),

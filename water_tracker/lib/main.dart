@@ -7,6 +7,7 @@ import 'package:water_tracker/features/start_screen.dart';
 
 import 'package:water_tracker/intake_provider.dart';
 import 'package:water_tracker/notification/notification.dart';
+import 'package:water_tracker/providers/add_intake.dart';
 import 'package:water_tracker/providers/set_up_goal_screen.dart';
 import 'package:water_tracker/setting/setting_screen.dart';
 
@@ -52,10 +53,10 @@ class _WaterTrackerState extends State<WaterTracker> {
       ),
 
       // home: HistoryScreen(),
-      // home: MainNavigationScreen(tab: "add"),
+      home: MainNavigationScreen(tab: "add"),
       // home: HomeScreen(),
       // home: SigninScreen(),
-      home: StartScreen(),
+      // home: AddIntake(),
       // home: SignupScreen(),
       // home: const SetupProfileScreen(),
       // home: SettingScreen(),
