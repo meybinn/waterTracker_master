@@ -58,26 +58,30 @@ class _AddIntakeState extends State<AddIntake> {
               ],
             ),
             Gaps.v52,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  width: 168,
-                  height: 67,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(36)),
-                    color: Color(0xFFd9d9d9),
-                  ),
-                  child: Text(
-                    "${context.watch<IntakeProvider>().totalIntake} ml",
-                    style: GoogleFonts.righteous(
-                      fontSize: 26,
-                      color: Theme.of(context).primaryColor,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    width: 168,
+                    height: 67,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(36)),
+                      color: Color(0xFFd9d9d9),
+                    ),
+                    child: Text(
+                      "${context.watch<IntakeProvider>().totalIntake} ml",
+                      style: GoogleFonts.righteous(
+                        fontSize: 26,
+                        color: Theme.of(context).primaryColor,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Gaps.v36,
             Padding(
@@ -94,7 +98,7 @@ class _AddIntakeState extends State<AddIntake> {
                         },
                         icon: FaIcon(
                           FontAwesomeIcons.whiskeyGlass,
-                          size: 120,
+                          size: 100,
                           color: Theme.of(context).primaryColor,
                         ),
                       ),
@@ -127,7 +131,7 @@ class _AddIntakeState extends State<AddIntake> {
                         },
                         icon: FaIcon(
                           FontAwesomeIcons.bottleWater,
-                          size: 206,
+                          size: 180,
                           color: Theme.of(context).primaryColor,
                         ),
                       ),
