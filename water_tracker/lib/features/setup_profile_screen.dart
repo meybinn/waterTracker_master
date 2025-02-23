@@ -66,10 +66,10 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
         age.isNotEmpty &&
         height.isNotEmpty &&
         weight.isNotEmpty) {
+      String userId = 'riha';
 
-        String userId = 'riha';
-
-        context.read<IntakeProvider>().updateUserInfo(userId, int.parse(age),gender, double.parse(weight), double.parse(height));
+      context.read<IntakeProvider>().updateUserInfo(userId, int.parse(age),
+          gender, double.parse(weight), double.parse(height));
 
       Navigator.push(
         context,
@@ -78,8 +78,6 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
         ),
       );
     }
-
-   
   }
 
   String? isGenderValid() {
@@ -124,6 +122,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false, // 자동으로 생성되는 뒤로가기 버튼 제거
         centerTitle: true,
         title: Text(
           "Set up your profile",

@@ -4,6 +4,8 @@ import 'package:water_tracker/services/database_helper.dart';
 class IntakeProvider with ChangeNotifier {
   final DatabaseHelper _databaseHelper = DatabaseHelper.instance;
 
+  bool _isNotification = false;
+
   String _userId = "";
 
   int _totalIntake = 0;
@@ -25,6 +27,12 @@ class IntakeProvider with ChangeNotifier {
   int get intakeGoal => _intakeGoal;
   int get interval => _interval;
   int get calcul => (totalIntake / intakeGoal * 100).floor();
+  bool get isNotification => _isNotification;
+
+  void setNotification(bool value) {
+    _isNotification = value;
+    notifyListeners();
+  }
 
   void updateIntake(int intake) {
     _totalIntake += intake;
