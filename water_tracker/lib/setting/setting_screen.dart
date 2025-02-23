@@ -28,6 +28,19 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    final intakeProvider = context.read<IntakeProvider>();
+    intakeProvider.loadUserData(intakeProvider.userId);
+
+    intakeProvider.addListener(() {
+      setState(() {
+        
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final intakeProvider = context.watch<IntakeProvider>();
 

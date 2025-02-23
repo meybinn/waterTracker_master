@@ -65,20 +65,23 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
       backgroundColor: scaffoldBackgroundColor,
       body: LayoutBuilder(
         builder: (context, constraints) {
-          return Padding(
+          final double screenHeight = constraints.maxHeight;
+          final double screenWidth = constraints.maxWidth;
+
+          return SingleChildScrollView(
             padding: EdgeInsets.symmetric(
-              vertical: 20,
-              horizontal: 30,
+              vertical: screenHeight * 0.02,
+              horizontal: screenWidth * 0.08,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: 50,
+                 height: screenHeight * 0.05,
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: 70,
+                    horizontal: screenWidth * 0.15,
                   ),
                   child: Text(
                     textAlign: TextAlign.center,
@@ -89,16 +92,16 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                     ),
                   ),
                 ),
-                Gaps.v20,
+                Gaps.v16,
                 Icon(
                   Icons.calendar_today_rounded,
                   color: Colors.white,
-                  size: Sizes.size80,
+                  size: screenHeight * 0.1,
                 ),
                 Gaps.v20,
                 Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: 90,
+                     horizontal: screenWidth * 0.05,
                   ),
                   child: Text(
                     textAlign: TextAlign.center,
@@ -110,7 +113,7 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                     maxLines: 2,
                   ),
                 ),
-                Gaps.v28,
+                Gaps.v16,
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -122,9 +125,9 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                         size: Sizes.size22,
                       ),
                     ),
-                    Gaps.h16,
+                    Gaps.h5,
                     SizedBox(
-                      width: 180,
+                      width: screenWidth * 0.45,
                       child: Slider(
                           // value: _sliderValue,
                           value: intakeGoal.toDouble(),
@@ -141,7 +144,7 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                             });
                           }),
                     ),
-                    Gaps.h16,
+                    Gaps.h1,
                     IconButton(
                       onPressed: _increaseGoal,
                       icon: FaIcon(
@@ -162,11 +165,11 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                           height: 50,
                           padding: EdgeInsets.symmetric(
                             horizontal: 10,
-                            vertical: 10,
+                            vertical: 1,
                           ),
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(15),
+                            borderRadius: BorderRadius.circular(10),
                             border: Border.all(
                               color: Color(0XFFDFDCDC),
                               width: 0.5,
@@ -209,11 +212,11 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                       height: 50,
                       padding: EdgeInsets.symmetric(
                         horizontal: 10,
-                        vertical: 10,
+                        vertical: 1,
                       ),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(10),
                         border: Border.all(
                           color: Color(0XFFDFDCDC),
                           width: 0.5,
@@ -252,11 +255,11 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                       height: 50,
                       padding: EdgeInsets.symmetric(
                         horizontal: 10,
-                        vertical: 10,
+                        vertical: 7,
                       ),
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(10),
                         border: Border.all(
                           color: Color(0XFFDFDCDC),
                           width: 0.5,

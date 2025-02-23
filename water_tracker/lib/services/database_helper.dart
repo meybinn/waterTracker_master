@@ -263,22 +263,22 @@ Future<void> closeDatabase() async {
   }
 }
 
-// setting screen 기능: 업데이트
-  // Future<int> updateUserSettings(String userId, int age, String gender,
-  //     double weight, double height, int intakeGoal) async {
-  //   final db = await database;
-  //   return await db.update(
-  //     'users',
-  //     {
-  //       'age': age,
-  //       'gender': gender,
-  //       'weight': weight,
-  //       'height': height,
-  //     },
-  //     where: 'id = ?',
-  //     whereArgs: [userId],
-  //   );
-  // }
+//setting screen 기능: 업데이트
+  Future<int> updateUserSettings(String userId, int age, String gender,
+      double weight, double height, int intakeGoal) async {
+    final db = await database;
+    return await db.update(
+      'users',
+      {
+        'age': age,
+        'gender': gender,
+        'weight': weight,
+        'height': height,
+      },
+      where: 'id = ?',
+      whereArgs: [userId],
+    );
+  }
 
 // // 전체 intake  get
 //   Future<int> getTotalIntake(int userId) async {

@@ -225,7 +225,7 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                   Column(
                     children: [
                       Container(
-                        width: 225,
+                        width: 270,
                         height: 50,
                         padding: EdgeInsets.symmetric(
                           horizontal: 10,
@@ -245,14 +245,14 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                             labelText: "From Time",
                             labelStyle: GoogleFonts.scheherazadeNew(
                               color: Color(0XFF7C7C7C),
-                              fontSize: Sizes.size16,
+                              fontSize: Sizes.size20,
                             ),
                             border: InputBorder.none,
                             suffixIcon: IconButton(
                               icon: Icon(
                                 Icons.access_time,
                                 color: Color(0XFF7C7C7C),
-                                size: Sizes.size24,
+                                size: Sizes.size28,
                               ),
                               onPressed: () => _selectTime(context, true),
                             ),
@@ -268,7 +268,7 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                   ),
                   Gaps.v16,
                   Container(
-                    width: 225,
+                    width: 270,
                     height: 50,
                     padding: EdgeInsets.symmetric(
                       horizontal: 10,
@@ -288,14 +288,14 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                         labelText: "To Time",
                         labelStyle: GoogleFonts.scheherazadeNew(
                           color: Color(0XFF7C7C7C),
-                          fontSize: Sizes.size16,
+                          fontSize: Sizes.size20,
                         ),
                         border: InputBorder.none,
                         suffixIcon: IconButton(
                           icon: Icon(
                             Icons.access_time,
                             color: Color(0XFF7C7C7C),
-                            size: Sizes.size24,
+                            size: Sizes.size28,
                           ),
                           onPressed: () => _selectTime(context, false),
                         ),
@@ -307,7 +307,7 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                   ),
                   Gaps.v16,
                   Container(
-                    width: 225,
+                    width: 270,
                     height: 50,
                     padding: EdgeInsets.symmetric(
                       horizontal: 10,
@@ -327,7 +327,7 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                         labelText: "Interval (hour)",
                         labelStyle: GoogleFonts.scheherazadeNew(
                           color: Color(0XFF7C7C7C),
-                          fontSize: Sizes.size16,
+                          fontSize: Sizes.size20,
                         ),
                       ),
                       onChanged: (value) {
