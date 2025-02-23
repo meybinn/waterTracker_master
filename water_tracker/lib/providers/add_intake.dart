@@ -28,7 +28,7 @@ class _AddIntakeState extends State<AddIntake> {
     return Scaffold(
         body: SafeArea(
       child: Padding(
-        padding: EdgeInsets.all(12),
+        padding: EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -36,30 +36,34 @@ class _AddIntakeState extends State<AddIntake> {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Today's",
-                      style: GoogleFonts.righteous(
-                        fontSize: Sizes.size32,
-                        color: Theme.of(context).primaryColor,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Today's",
+                        style: GoogleFonts.righteous(
+                          fontSize: Sizes.size32,
+                          color: Theme.of(context).primaryColor,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "Water Intake",
-                      style: GoogleFonts.righteous(
-                        fontSize: Sizes.size32,
-                        color: Theme.of(context).primaryColor,
+                      Text(
+                        "Water Intake",
+                        style: GoogleFonts.righteous(
+                          fontSize: Sizes.size32,
+                          color: Theme.of(context).primaryColor,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
             Gaps.v52,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
                   alignment: Alignment.center,
@@ -80,79 +84,85 @@ class _AddIntakeState extends State<AddIntake> {
               ],
             ),
             Gaps.v36,
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Column(
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final double screenWidth = constraints.maxWidth;
+
+                return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      IconButton(
-                        onPressed: () {
-                          context.read<IntakeProvider>().updateIntake(150);
-                        },
-                        icon: FaIcon(
-                          FontAwesomeIcons.whiskeyGlass,
-                          size: 120,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                      ),
                       Column(
                         children: [
-                          Text(
-                            "A small cup",
-                            style: GoogleFonts.righteous(
-                              fontSize: 14,
+                          IconButton(
+                            onPressed: () {
+                              context.read<IntakeProvider>().updateIntake(150);
+                            },
+                            icon: FaIcon(
+                              FontAwesomeIcons.whiskeyGlass,
+                              size: screenWidth * 0.25,
                               color: Theme.of(context).primaryColor,
                             ),
                           ),
-                          Text(
-                            "each tab added 190ml",
-                            style: GoogleFonts.righteous(
-                              fontSize: 10,
+                          Column(
+                            children: [
+                              Text(
+                                "A small cup",
+                                style: GoogleFonts.righteous(
+                                  fontSize: screenWidth * 0.05,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ),
+                              Text(
+                                "each tab added 190ml",
+                                style: GoogleFonts.righteous(
+                                  fontSize: screenWidth * 0.03,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Gaps.h36,
+                      Column(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              context.read<IntakeProvider>().updateIntake(500);
+                            },
+                            icon: FaIcon(
+                              FontAwesomeIcons.bottleWater,
+                              size: screenWidth * 0.4,
                               color: Theme.of(context).primaryColor,
                             ),
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                "A bottle",
+                                style: GoogleFonts.righteous(
+                                  fontSize: screenWidth * 0.05,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ),
+                              Text(
+                                "each tab added 500ml",
+                                style: GoogleFonts.righteous(
+                                  fontSize: screenWidth * 0.03,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
                     ],
                   ),
-                  Gaps.h36,
-                  Column(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          context.read<IntakeProvider>().updateIntake(500);
-                        },
-                        icon: FaIcon(
-                          FontAwesomeIcons.bottleWater,
-                          size: 206,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            "A bottle",
-                            style: GoogleFonts.righteous(
-                              fontSize: 14,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                          Text(
-                            "each tab added 500ml",
-                            style: GoogleFonts.righteous(
-                              fontSize: 10,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                );
+              },
             ),
             Gaps.v28,
             Divider(
@@ -191,7 +201,7 @@ class _AddIntakeState extends State<AddIntake> {
                     ),
                   ),
                 ),
-                Gaps.h56,
+                Gaps.h48,
                 GestureDetector(
                   onTap: () {
                     setState(() {

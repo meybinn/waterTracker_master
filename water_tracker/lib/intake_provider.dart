@@ -7,11 +7,11 @@ class IntakeProvider with ChangeNotifier {
   String _userId = "";
 
   int _totalIntake = 0;
-  String _username = "riha";
-  String _gender = "Female";
-  String _age = "24";
-  String _height = "160";
-  String _weight = "49";
+  String _username = " ";
+  String _gender = "";
+  String _age = "";
+  String _height = "";
+  String _weight = "";
   int _intakeGoal = 2000;
   int _interval = 0;
 
@@ -52,17 +52,14 @@ class IntakeProvider with ChangeNotifier {
   Future<void> loadUserData(String userId) async{
     final userSettings = await _databaseHelper.getUserSettings(userId);
     if(userSettings != null){
-      _username = userSettings['username'];
-      _gender = userSettings['gender'];
-      _age = userSettings['age'].toString();
-      _height = userSettings['height'].toString();
-      _weight = userSettings['weight'].toString();
+      _username = userSettings['username'] ?? "";
+      _gender = userSettings['gender'] ?? "";
+      _age = userSettings['age'].toString() ?? "";
+      _height = userSettings['height'].toString() ?? "";
+      _weight = userSettings['weight'].toString() ?? "";
+      _intakeGoal = userSettings['intakeGoal'] ?? 2000;
+      _interval = userSettings['interval'] ?? 0;
 
-      final goalData = await _databaseHelper.getUserSettings(userId);
-      if(goalData != null){
-        _intakeGoal = goalData['intakeGoal'];
-        _interval = goalData['interval'];
-      }
       notifyListeners();
     }
   }
@@ -76,16 +73,24 @@ class IntakeProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void updateUserInfo(String userId, int age, String gender, double weight, double height) async {
+    // await _databaseHelper.updateUserInfo(userId, age, gender, weight, height);
+    // await loadUserData(userId);
+    this._gender = gender;
+    this._age = age.toString();
+    this._height = height.toString();
+    this._weight = weight.toString();
+
+    notifyListeners();
+
+  }
+
+  
   void updateGoal(int intake, int time) {
     _intakeGoal = intake;
     _interval = time;
 
     notifyListeners();
-  }
-
-  Future<void> updateUserInfo(String userId, int age, String gender, double weight, double height) async {
-    await _databaseHelper.updateUserInfo(userId, age, gender, weight, height);
-    await loadUserData(userId);
   }
 
   // void calculation() {
