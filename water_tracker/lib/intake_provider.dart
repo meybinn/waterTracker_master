@@ -7,11 +7,11 @@ class IntakeProvider with ChangeNotifier {
   String _userId = "";
 
   int _totalIntake = 0;
-  String _username = "";
-  String _gender = "";
-  String _age = "";
-  String _height = "";
-  String _weight = "";
+  String _username = "riha";
+  String _gender = "Female";
+  String _age = "24";
+  String _height = "160";
+  String _weight = "49";
   int _intakeGoal = 2000;
   int _interval = 0;
 

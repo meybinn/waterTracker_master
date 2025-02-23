@@ -76,7 +76,7 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: 70,
+                horizontal: 60,
               ),
               child: Text(
                 textAlign: TextAlign.center,
@@ -87,7 +87,7 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                 ),
               ),
             ),
-            Gaps.v20,
+            Gaps.v16,
             Icon(
               Icons.calendar_today_rounded,
               color: Colors.white,
@@ -96,7 +96,7 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
             Gaps.v20,
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: 90,
+                horizontal: 20,
               ),
               child: Text(
                 textAlign: TextAlign.center,
@@ -108,7 +108,7 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                 maxLines: 2,
               ),
             ),
-            Gaps.v28,
+            Gaps.v16,
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -120,9 +120,9 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                     size: Sizes.size22,
                   ),
                 ),
-                Gaps.h16,
+                Gaps.h5,
                 SizedBox(
-                  width: 200,
+                  width: 180,
                   child: Slider(
                       // value: _sliderValue,
                       value: intakeGoal.toDouble(),
@@ -139,7 +139,7 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                         });
                       }),
                 ),
-                Gaps.h16,
+                Gaps.h1,
                 IconButton(
                   onPressed: _increaseGoal,
                   icon: FaIcon(
@@ -150,18 +150,19 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                 ),
               ],
             ),
-            Gaps.v20,
+            Gaps.v16,
             Column(
               children: [
                 Container(
-                  width: 300,
+                  width: 225,
+                  height: 50,
                   padding: EdgeInsets.symmetric(
                     horizontal: 10,
-                    vertical: 10,
+                    vertical: 1,
                   ),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(10),
                     border: Border.all(
                       color: Color(0XFFDFDCDC),
                       width: 0.5,
@@ -173,14 +174,14 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                       labelText: "From Time",
                       labelStyle: GoogleFonts.scheherazadeNew(
                         color: Color(0XFF7C7C7C),
-                        fontSize: Sizes.size20,
+                        fontSize: Sizes.size16,
                       ),
                       border: InputBorder.none,
                       suffixIcon: IconButton(
                         icon: Icon(
                           Icons.access_time,
                           color: Color(0XFF7C7C7C),
-                          size: Sizes.size28,
+                          size: Sizes.size24,
                         ),
                         onPressed: () => _selectTime(context, true),
                       ),
@@ -192,16 +193,17 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                 ),
               ],
             ),
-            Gaps.v20,
+            Gaps.v16,
             Container(
-              width: 300,
+              width: 225,
+              height: 50,
               padding: EdgeInsets.symmetric(
                 horizontal: 10,
-                vertical: 10,
+                vertical: 1,
               ),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(10),
                 border: Border.all(
                   color: Color(0XFFDFDCDC),
                   width: 0.5,
@@ -213,14 +215,14 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                   labelText: "To Time",
                   labelStyle: GoogleFonts.scheherazadeNew(
                     color: Color(0XFF7C7C7C),
-                    fontSize: Sizes.size20,
+                    fontSize: Sizes.size16,
                   ),
                   border: InputBorder.none,
                   suffixIcon: IconButton(
                     icon: Icon(
                       Icons.access_time,
                       color: Color(0XFF7C7C7C),
-                      size: Sizes.size28,
+                      size: Sizes.size24,
                     ),
                     onPressed: () => _selectTime(context, false),
                   ),
@@ -230,16 +232,17 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                 ),
               ),
             ),
-            Gaps.v20,
+            Gaps.v16,
             Container(
-              width: 300,
+              width: 225,
+              height: 50,
               padding: EdgeInsets.symmetric(
                 horizontal: 10,
-                vertical: 10,
+                vertical: 4,
               ),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(10),
                 border: Border.all(
                   color: Color(0XFFDFDCDC),
                   width: 0.5,
@@ -251,7 +254,7 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                   labelText: "Interval (hour)",
                   labelStyle: GoogleFonts.scheherazadeNew(
                     color: Color(0XFF7C7C7C),
-                    fontSize: Sizes.size20,
+                    fontSize: Sizes.size16,
                   ),
                 ),
                 onChanged: (value) {
@@ -277,7 +280,7 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    minimumSize: Size(150, 60),
+                    minimumSize: Size(120, 55),
                     backgroundColor: Color(0xFF4C89B2),
                   ),
                   child: Text(
@@ -292,7 +295,7 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    minimumSize: Size(150, 60),
+                    minimumSize: Size(120, 55),
                     backgroundColor: Color(0xFFD9D9D9),
                   ),
                   child: Text(

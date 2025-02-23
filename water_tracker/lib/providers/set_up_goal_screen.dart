@@ -23,7 +23,7 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
   TimeOfDay? toTime;
   int _interval = 1;
   double _sliderValue = 2000;
-  String userId = "riha";
+  String userId = " ";
 
   void _increaseGoal() {
     setState(() {
@@ -270,7 +270,7 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
               height: 50,
               padding: EdgeInsets.symmetric(
                 horizontal: 10,
-                vertical: 7,
+                vertical: 4,
               ),
               decoration: BoxDecoration(
                 color: Colors.white,
