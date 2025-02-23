@@ -52,8 +52,9 @@ class _WaterTrackerState extends State<WaterTracker> {
         ),
       ),
 
+      home: StartScreen(),
       // home: HistoryScreen(),
-      home: MainNavigationScreen(tab: "add"),
+      // home: MainNavigationScreen(tab: "add"),
       // home: HomeScreen(),
       // home: SigninScreen(),
       // home: AddIntake(),
