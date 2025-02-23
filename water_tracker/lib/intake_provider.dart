@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:water_tracker/services/database_helper.dart';
 
 class IntakeProvider with ChangeNotifier {
+  final DatabaseHelper _databaseHelper = DatabaseHelper.instance;
+
+  String _userId = "";
+
   int _totalIntake = 0;
-
   String _username = "";
-
   String _gender = "";
   String _age = "";
   String _height = "";
   String _weight = "";
-
   int _intakeGoal = 2000;
   int _interval = 0;
 
+  String get userId => _userId;
   int get totalIntake => _totalIntake;
   String get username => _username;
   String get gender => _gender;
@@ -35,10 +38,33 @@ class IntakeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void setUsername(String username) {
-    _username = username;
+  void setUsername(String newUsername) {
+    _username = newUsername;
 
     notifyListeners();
+  }
+
+  void setUserId(String userId){
+    _userId = userId;
+    notifyListeners();
+  }
+
+  Future<void> loadUserData(String userId) async{
+    final userSettings = await _databaseHelper.getUserSettings(userId);
+    if(userSettings != null){
+      _username = userSettings['username'];
+      _gender = userSettings['gender'];
+      _age = userSettings['age'].toString();
+      _height = userSettings['height'].toString();
+      _weight = userSettings['weight'].toString();
+
+      final goalData = await _databaseHelper.getUserSettings(userId);
+      if(goalData != null){
+        _intakeGoal = goalData['intakeGoal'];
+        _interval = goalData['interval'];
+      }
+      notifyListeners();
+    }
   }
 
   void setString(String gender, String age, String height, String weight) {
@@ -55,6 +81,11 @@ class IntakeProvider with ChangeNotifier {
     _interval = time;
 
     notifyListeners();
+  }
+
+  Future<void> updateUserInfo(String userId, int age, String gender, double weight, double height) async {
+    await _databaseHelper.updateUserInfo(userId, age, gender, weight, height);
+    await loadUserData(userId);
   }
 
   // void calculation() {

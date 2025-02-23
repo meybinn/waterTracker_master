@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
 import 'package:water_tracker/features/signIn_screen.dart';
 import 'package:water_tracker/features/signup_screen.dart';
+import 'package:water_tracker/intake_provider.dart';
 
 class StartScreen extends StatefulWidget {
+  
   const StartScreen({super.key});
 
   @override
@@ -13,6 +16,14 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    final intakeProvider = Provider.of<IntakeProvider> (context, listen: false);
+    intakeProvider.loadUserData(" ");
+      }
+
   void _onSignUpTap() {
     Navigator.push(
       context,
@@ -41,9 +52,9 @@ class _StartScreenState extends State<StartScreen> {
         body: Stack(
           children: [
             Positioned(
-              left: 46,
+              left: 35,
               right: 25,
-              top: 46,
+              top: 20,
               bottom: 156,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,12 +87,12 @@ class _StartScreenState extends State<StartScreen> {
                 children: [
                   const Icon(
                     Icons.local_drink,
-                    size: 150,
+                    size: 120,
                   ),
                   Gaps.v10,
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 85,
+                      horizontal: 40,
                     ),
                     child: Text(
                       textAlign: TextAlign.center,

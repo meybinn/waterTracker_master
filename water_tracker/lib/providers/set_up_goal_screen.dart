@@ -6,6 +6,7 @@ import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
 import 'package:water_tracker/features/main_navigation/main_navigation_screen.dart';
 import 'package:water_tracker/intake_provider.dart';
+import 'package:water_tracker/services/database_helper.dart';
 
 class SetUpGoalScreen extends StatefulWidget {
   const SetUpGoalScreen({
@@ -22,6 +23,7 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
   TimeOfDay? toTime;
   int _interval = 1;
   double _sliderValue = 2000;
+  String userId = "riha";
 
   void _increaseGoal() {
     setState(() {
@@ -57,12 +59,36 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
   }
 
   void _onNext() {
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => MainNavigationScreen(tab: 'home'),
       ),
     );
+  }
+
+  Future<void> _saveGoal() async {
+    if(userId.isNotEmpty && fromTime != null && toTime != null && _interval > 0){
+
+      try{
+      await DatabaseHelper.instance.insertOrUpdateGoal(
+        userId, 
+        intakeGoal, 
+        fromTime!, 
+        toTime!, 
+        _interval,
+        );
+
+        final intakeProvider = Provider.of<IntakeProvider>(context, listen: false);
+        intakeProvider.updateGoal(intakeGoal, _interval);
+
+        _onNext();
+      } catch(e) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Failed save goal."),),);
+      }
+    } else{
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please fill all the parts correctly!"),),);
+    }
   }
 
   @override
@@ -84,7 +110,7 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: 70,
+                horizontal: 60,
               ),
               child: Text(
                 textAlign: TextAlign.center,
@@ -95,7 +121,7 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                 ),
               ),
             ),
-            Gaps.v20,
+            Gaps.v16,
             Icon(
               Icons.calendar_today_rounded,
               color: Colors.white,
@@ -104,7 +130,7 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
             Gaps.v20,
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: 90,
+                horizontal: 20,
               ),
               child: Text(
                 textAlign: TextAlign.center,
@@ -116,7 +142,7 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                 maxLines: 2,
               ),
             ),
-            Gaps.v28,
+            Gaps.v16,
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -128,9 +154,9 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                     size: Sizes.size22,
                   ),
                 ),
-                Gaps.h16,
+                Gaps.h5,
                 SizedBox(
-                  width: 200,
+                  width: 180,
                   child: Slider(
                       value: _sliderValue,
                       min: 0,
@@ -145,7 +171,7 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                         });
                       }),
                 ),
-                Gaps.h16,
+                Gaps.h1,
                 IconButton(
                   onPressed: _increaseGoal,
                   icon: FaIcon(
@@ -160,14 +186,15 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
             Column(
               children: [
                 Container(
-                  width: 300,
+                  width: 225,
+                  height: 50,
                   padding: EdgeInsets.symmetric(
                     horizontal: 10,
-                    vertical: 10,
+                    vertical: 1,
                   ),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(10),
                     border: Border.all(
                       color: Color(0XFFDFDCDC),
                       width: 0.5,
@@ -179,14 +206,14 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                       labelText: "From Time",
                       labelStyle: GoogleFonts.scheherazadeNew(
                         color: Color(0XFF7C7C7C),
-                        fontSize: Sizes.size20,
+                        fontSize: Sizes.size16,
                       ),
                       border: InputBorder.none,
                       suffixIcon: IconButton(
                         icon: Icon(
                           Icons.access_time,
                           color: Color(0XFF7C7C7C),
-                          size: Sizes.size28,
+                          size: Sizes.size24,
                         ),
                         onPressed: () => _selectTime(context, true),
                       ),
@@ -198,16 +225,17 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                 ),
               ],
             ),
-            Gaps.v20,
+            Gaps.v16,
             Container(
-              width: 300,
+              width: 225,
+              height: 50,
               padding: EdgeInsets.symmetric(
                 horizontal: 10,
-                vertical: 10,
+                vertical: 1,
               ),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(10),
                 border: Border.all(
                   color: Color(0XFFDFDCDC),
                   width: 0.5,
@@ -219,14 +247,14 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                   labelText: "To Time",
                   labelStyle: GoogleFonts.scheherazadeNew(
                     color: Color(0XFF7C7C7C),
-                    fontSize: Sizes.size20,
+                    fontSize: Sizes.size16,
                   ),
                   border: InputBorder.none,
                   suffixIcon: IconButton(
                     icon: Icon(
                       Icons.access_time,
                       color: Color(0XFF7C7C7C),
-                      size: Sizes.size28,
+                      size: Sizes.size24,
                     ),
                     onPressed: () => _selectTime(context, false),
                   ),
@@ -236,16 +264,17 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                 ),
               ),
             ),
-            Gaps.v20,
+            Gaps.v16,
             Container(
-              width: 300,
+              width: 225,
+              height: 50,
               padding: EdgeInsets.symmetric(
                 horizontal: 10,
-                vertical: 10,
+                vertical: 7,
               ),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(10),
                 border: Border.all(
                   color: Color(0XFFDFDCDC),
                   width: 0.5,
@@ -257,7 +286,7 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                   labelText: "Interval (hour)",
                   labelStyle: GoogleFonts.scheherazadeNew(
                     color: Color(0XFF7C7C7C),
-                    fontSize: Sizes.size20,
+                    fontSize: Sizes.size16,
                   ),
                 ),
                 onChanged: (value) {
@@ -276,7 +305,7 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    minimumSize: Size(150, 60),
+                    minimumSize: Size(120, 55),
                     backgroundColor: Color(0xFFD9D9D9),
                   ),
                   child: Text(
@@ -289,14 +318,9 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                   ),
                 ),
                 ElevatedButton(
-                  onPressed: () {
-                    context
-                        .read<IntakeProvider>()
-                        .updateGoal(intakeGoal, _interval);
-                    _onNext();
-                  },
+                  onPressed: _saveGoal,
                   style: ElevatedButton.styleFrom(
-                    minimumSize: Size(150, 60),
+                    minimumSize: Size(120, 55),
                     backgroundColor: Color(0xFF4C89B2),
                   ),
                   child: Text(

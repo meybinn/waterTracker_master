@@ -10,6 +10,7 @@ import 'package:water_tracker/intake_provider.dart';
 import 'package:water_tracker/notification/notification.dart';
 
 class HomeScreen extends StatefulWidget {
+
   const HomeScreen({super.key});
 
   @override
@@ -18,6 +19,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
+
+  late String userId;
+
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -41,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen>
         setState(() {}); // UI 강제 업데이트
       });
 
+    //total intake reaches the goal 확인 
     if (context.read<IntakeProvider>().totalIntake >=
         context.read<IntakeProvider>().intakeGoal) {
       _controller.stop();
@@ -106,7 +111,12 @@ class _HomeScreenState extends State<HomeScreen>
     int intakeReal = context.watch<IntakeProvider>().totalIntake;
 
     double outerConHeight = MediaQuery.of(context).size.height * 0.4 + 60;
+    if(outerConHeight <= 0){
+      outerConHeight = 100;
+    }
+
     double actualIntakeHeight = outerConHeight * (intakeReal / intakeGoal);
+    actualIntakeHeight = actualIntakeHeight.isNaN || actualIntakeHeight < 0 ? 0 : actualIntakeHeight;
     actualIntakeHeight = actualIntakeHeight.clamp(0, outerConHeight);
 
     String formatCountdown =
@@ -120,23 +130,24 @@ class _HomeScreenState extends State<HomeScreen>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Gaps.v20,
+            Gaps.v36,
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Icon(
                   Icons.account_circle_outlined,
-                  size: 90,
+                  size: 70,
                   color: Color(0XFF7C7C7C),
                 ),
-                Gaps.h10,
+                Gaps.h5,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "Have a good day!",
                       style: GoogleFonts.righteous(
-                        fontSize: Sizes.size32,
+                        fontSize: Sizes.size22,
+                        fontWeight: FontWeight.bold,
                         color: Color(0XFF7C7C7C),
                       ),
                     ),
@@ -152,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               ],
             ),
-            Gaps.v36,
+            Gaps.v28,
             Text(
               "$intakeGoal ml",
               style: GoogleFonts.righteous(
@@ -183,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen>
                   bottom: 6,
                   child: Container(
                     alignment: Alignment.topCenter,
-                    width: 207,
+                    width: 180,
                     height: actualIntakeHeight - 10,
                     decoration: BoxDecoration(
                       color: Color.fromARGB(200, 255, 255, 255),

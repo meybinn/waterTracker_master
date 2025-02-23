@@ -1,0 +1,2 @@
+C:/Users/rihaf/Documents/GitHub/waterTracker_master/water_tracker/android/app/.cxx/RelWithDebInfo/1m1j2u3f/x86/CMakeFiles/edit_cache.dir
+C:/Users/rihaf/Documents/GitHub/waterTracker_master/water_tracker/android/app/.cxx/RelWithDebInfo/1m1j2u3f/x86/CMakeFiles/rebuild_cache.dir

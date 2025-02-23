@@ -1,7 +1,9 @@
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
+import 'package:uuid/uuid.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._internal();
@@ -69,13 +71,17 @@ class DatabaseHelper {
   }
 
 // SignUpScreen 기능 : insert
-  Future<int> insertUser(String id, String username, String password) async {
+  Future<int> insertUser(String username, String email, String password) async {
     final db = await database;
+    var uuid = Uuid();
+    String userId = uuid.v4();
+
     return await db.insert(
       'users',
       {
-        'id': id,
+        // 'id': userId,
         'username': username,
+        'email': email,
         'password': password,
       },
       conflictAlgorithm: ConflictAlgorithm.replace,
@@ -115,8 +121,8 @@ class DatabaseHelper {
   }
 
 // setUpGoalScreen 기능 : insert
-  Future<int> insertOrUpdateGoal(String userId, int intakeGoal, String fromTime,
-      String toTime, int interval) async {
+  Future<int> insertOrUpdateGoal(String userId, int intakeGoal, TimeOfDay fromTime,
+      TimeOfDay toTime, int interval) async {
     final db = await database;
 
     // 기존 목표 확인
@@ -132,8 +138,8 @@ class DatabaseHelper {
         'setting',
         {
           'intakeGoal': intakeGoal,
-          'fromTime': fromTime,
-          'toTime': toTime,
+          'from_time': '${fromTime.hour}:${fromTime.minute}',
+          'to_time': '${toTime.hour}:${toTime.minute}',
           'interval': interval,
         },
         where: 'user_id = ?',
@@ -146,8 +152,8 @@ class DatabaseHelper {
         {
           'user_id': userId,
           'intakeGoal': intakeGoal,
-          'fromTime': fromTime,
-          'toTime': toTime,
+          'from_time': '${fromTime.hour}:${fromTime.minute}',
+          'to_time': '${toTime.hour}:${toTime.minute}',
           'interval': interval,
         },
       );
@@ -210,6 +216,17 @@ class DatabaseHelper {
     );
   }
 
+// get user settings
+Future<Map<String, dynamic>?> getUserSetting(String userId) async{
+  final db = await database;
+  final List<Map<String, dynamic>> result = await db.query(
+    'setting',
+    where: 'user_id = ?',
+    whereArgs: [userId],
+  );
+  return result.isNotEmpty ? result.first : null;
+}
+
 // saveGoalScreen 기능 : update
   Future<int> updateGoal(String userId, int intakeGoal, String fromTime,
       String toTime, int interval) async {
@@ -237,6 +254,14 @@ class DatabaseHelper {
     );
     return result.isNotEmpty ? result.first : null;
   }
+
+//closing database
+Future<void> closeDatabase() async {
+  final db = _database;
+  if(db != null){
+    await db.close();
+  }
+}
 
 // setting screen 기능: 업데이트
   // Future<int> updateUserSettings(String userId, int age, String gender,

@@ -10,13 +10,15 @@ import 'package:water_tracker/intake_provider.dart';
 import 'package:water_tracker/services/database_helper.dart';
 
 class SignupScreen extends StatefulWidget {
-  const SignupScreen({super.key});
+
+  const SignupScreen({ super.key});
 
   @override
   State<SignupScreen> createState() => _SignupScreenState();
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -71,11 +73,13 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   void _onNextTap() async {
-    if (_isEmailValid() != null || email.isEmpty || username.isEmpty) return;
+    if (_isEmailValid() != null || _isPasswordValid() != null || email.isEmpty || username.isEmpty || password.isEmpty) return;
 
     try{
-      int userId = await DatabaseHelper.instance.insertUser(username, email, password,);
-      print("User add with ID: $userId");
+     int userId = await DatabaseHelper.instance.insertUser(username, email, password);
+     print("User added with Id: $userId");     
+     
+     context.read<IntakeProvider>().setUsername(username);
 
       Navigator.push(
       context,
@@ -83,9 +87,6 @@ class _SignupScreenState extends State<SignupScreen> {
         builder: (context) => const SetupProfileScreen(),
       ),
     );
-
-
-    context.read<IntakeProvider>().setUsername(username);
     } catch (e) {
       print("Error inserting user: $e");
       ScaffoldMessenger.of(context).showSnackBar(

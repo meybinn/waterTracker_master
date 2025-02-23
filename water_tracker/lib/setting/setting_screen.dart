@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
+import 'package:water_tracker/features/start_screen.dart';
 import 'package:water_tracker/setting/dialog_logout.dart';
 import 'package:water_tracker/intake_provider.dart';
 
@@ -23,7 +24,7 @@ class _SettingScreenState extends State<SettingScreen> {
     Navigator.pop(
       context,
       MaterialPageRoute(
-        builder: (context) => Container(),
+        builder: (context) => StartScreen(),
       ),
     );
   }
@@ -42,7 +43,7 @@ class _SettingScreenState extends State<SettingScreen> {
               size: 120,
               color: Color(0XCC7C7C7C),
             ),
-            Gaps.v5,
+            Gaps.v1,
             Text(
               "Username",
               style: GoogleFonts.scheherazadeNew(
@@ -51,7 +52,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Gaps.v28,
+            Gaps.v20,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -98,7 +99,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ],
             ),
-            Gaps.v24,
+            Gaps.v20,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -145,7 +146,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ],
             ),
-            Gaps.v24,
+            Gaps.v20,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -171,14 +172,14 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ],
             ),
-            Gaps.v80,
+            Gaps.v28,
             Divider(
               color: Color(0XFF7C7C7C),
               thickness: 1,
               indent: 40,
               endIndent: 40,
             ),
-            Gaps.v20,
+            Gaps.v14,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -186,7 +187,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   "Allow notification",
                   style: GoogleFonts.scheherazadeNew(
                     color: Color(0XFF7C7C7C),
-                    fontSize: Sizes.size28 + Sizes.size2,
+                    fontSize: Sizes.size28,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -201,7 +202,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ],
             ),
-            Gaps.v28,
+            Gaps.v16,
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -211,7 +212,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     "Log out",
                     style: GoogleFonts.scheherazadeNew(
                       color: Color(0XFFEB6F6F),
-                      fontSize: Sizes.size34,
+                      fontSize: Sizes.size32,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

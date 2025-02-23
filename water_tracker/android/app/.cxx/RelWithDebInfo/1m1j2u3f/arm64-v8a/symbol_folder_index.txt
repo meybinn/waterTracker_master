@@ -1,0 +1,1 @@
+C:\Users\rihaf\Documents\GitHub\waterTracker_master\water_tracker\build\app\intermediates\cxx\RelWithDebInfo\1m1j2u3f\obj\arm64-v8a

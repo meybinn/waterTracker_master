@@ -66,6 +66,11 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
         age.isNotEmpty &&
         height.isNotEmpty &&
         weight.isNotEmpty) {
+
+        String userId = 'riha';
+
+        context.read<IntakeProvider>().updateUserInfo(userId, int.parse(age),gender, double.parse(weight), double.parse(height));
+
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -74,7 +79,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
       );
     }
 
-    context.read<IntakeProvider>().setString(gender, age, weight, height);
+   
   }
 
   String? isGenderValid() {
@@ -130,7 +135,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.only(
-          top: Sizes.size52,
+          top: Sizes.size28,
           right: 120,
           left: 120,
           bottom: 150,
@@ -145,21 +150,21 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
               controller: genderController,
               error: isGenderValid(),
             ),
-            Gaps.v24,
+            Gaps.v16,
             Setup(
               title: "Age",
               hintText: "Enter your age",
               controller: ageController,
               error: isAgeValid(),
             ),
-            Gaps.v24,
+            Gaps.v16,
             Setup(
               title: "Height (cm)",
               hintText: "Enter your height in cm",
               controller: heightController,
               error: isHeightValid(),
             ),
-            Gaps.v24,
+            Gaps.v16,
             Setup(
               title: "Weight (kg)",
               hintText: "Enter your weight in kg",

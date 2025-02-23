@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:water_tracker/constant/sizes.dart';
-import 'package:water_tracker/features/add_intake.dart';
 import 'package:water_tracker/features/history_screen.dart';
 import 'package:water_tracker/features/home_screen.dart';
 import 'package:water_tracker/features/main_navigation/nev_tab.dart';
+import 'package:water_tracker/providers/add_intake.dart';
 import 'package:water_tracker/providers/save_goal_screen.dart';
 import 'package:water_tracker/setting/setting_screen.dart';
 
@@ -12,9 +12,9 @@ class MainNavigationScreen extends StatefulWidget {
   final String tab;
 
   const MainNavigationScreen({
-    super.key,
+    Key? key,
     required this.tab,
-  });
+  }) : super(key: key);
 
   @override
   State<MainNavigationScreen> createState() => _MainNavigationScreenState();
