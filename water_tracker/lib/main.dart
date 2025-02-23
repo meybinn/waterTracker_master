@@ -51,8 +51,8 @@ class _WaterTrackerState extends State<WaterTracker> {
         ),
       ),
 
+      home: StartScreen(),
       // home: HistoryScreen(),
-      // home: MainNavigationScreen(tab: "setting"),
       // home: HomeScreen(),
       // home: SigninScreen(),
       // home: SignupScreen(),
@@ -62,7 +62,6 @@ class _WaterTrackerState extends State<WaterTracker> {
       // home: SetUpGoalScreen(),
       // home: SettingScreen(),
       // home: SaveGoalScreen(),
-      home: StartScreen(),
     );
   }
 }
