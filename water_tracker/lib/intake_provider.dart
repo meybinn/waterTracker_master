@@ -44,26 +44,29 @@ class IntakeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void setUserId(String userId){
+  void setUserId(String userId) {
     _userId = userId;
     notifyListeners();
   }
 
-  Future<void> loadUserData(String userId) async{
+  Future<void> loadUserData(String userId) async {
     final userSettings = await _databaseHelper.getUserSettings(userId);
-    if(userSettings != null){
+    if (userSettings != null) {
       _username = userSettings['username'];
       _gender = userSettings['gender'];
+      print("Gender loaded: $_gender");
       _age = userSettings['age'].toString();
       _height = userSettings['height'].toString();
       _weight = userSettings['weight'].toString();
 
       final goalData = await _databaseHelper.getUserSettings(userId);
-      if(goalData != null){
+      if (goalData != null) {
         _intakeGoal = goalData['intakeGoal'];
         _interval = goalData['interval'];
       }
       notifyListeners();
+    } else {
+      print("User date not found for userId: $userId");
     }
   }
 
@@ -83,7 +86,8 @@ class IntakeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> updateUserInfo(String userId, int age, String gender, double weight, double height) async {
+  Future<void> updateUserInfo(String userId, int age, String gender,
+      double weight, double height) async {
     await _databaseHelper.updateUserInfo(userId, age, gender, weight, height);
     await loadUserData(userId);
   }
