@@ -8,7 +8,6 @@ import 'package:water_tracker/features/signup_screen.dart';
 import 'package:water_tracker/intake_provider.dart';
 
 class StartScreen extends StatefulWidget {
-  
   const StartScreen({super.key});
 
   @override
@@ -16,13 +15,12 @@ class StartScreen extends StatefulWidget {
 }
 
 class _StartScreenState extends State<StartScreen> {
-
   @override
   void initState() {
     super.initState();
-    final intakeProvider = Provider.of<IntakeProvider> (context, listen: false);
+    final intakeProvider = Provider.of<IntakeProvider>(context, listen: false);
     intakeProvider.loadUserData(" ");
-      }
+  }
 
   void _onSignUpTap() {
     Navigator.push(
@@ -85,14 +83,18 @@ class _StartScreenState extends State<StartScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Icon(
-                    Icons.local_drink,
-                    size: 120,
+                  Padding(
+                    padding: EdgeInsets.only(top: 110),
+                    child: Image.asset(
+                      'assets/icons/arcticons_waterdrinkreminder.png',
+                      width: 177,
+                      height: 177,
+                    ),
                   ),
                   Gaps.v10,
                   Padding(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 40,
+                      horizontal: 20,
                     ),
                     child: Text(
                       textAlign: TextAlign.center,
@@ -128,7 +130,7 @@ class _StartScreenState extends State<StartScreen> {
                       ),
                     ),
                   ),
-                  Gaps.v20,
+                  Gaps.v16,
                   GestureDetector(
                     onTap: _onSignInTap,
                     child: Container(

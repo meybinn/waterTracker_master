@@ -158,11 +158,13 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                     ),
                   ),
                   Gaps.v16,
-                  Icon(
-                    Icons.calendar_today_rounded,
-                    color: Colors.white,
-                    size: screenHeight * 0.1,
-                    // size: Sizes.size80,
+                  Padding(
+                    padding: EdgeInsets.only(top: 2),
+                    child: Image.asset(
+                      'assets/icons/calendar.png',
+                      width: 120,
+                      height: 120,
+                    ),
                   ),
                   Gaps.v20,
                   Padding(

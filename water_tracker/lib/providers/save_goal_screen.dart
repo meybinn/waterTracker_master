@@ -77,7 +77,7 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                 height: screenHeight * 0.05,
+                  height: screenHeight * 0.05,
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(
@@ -92,16 +92,19 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                     ),
                   ),
                 ),
-                Gaps.v16,
-                Icon(
-                  Icons.calendar_today_rounded,
-                  color: Colors.white,
-                  size: screenHeight * 0.1,
+                Gaps.v12,
+                Padding(
+                  padding: EdgeInsets.only(top: 2),
+                  child: Image.asset(
+                    'assets/icons/calendar.png',
+                    width: 120,
+                    height: 120,
+                  ),
                 ),
-                Gaps.v20,
+                Gaps.v8,
                 Padding(
                   padding: EdgeInsets.symmetric(
-                     horizontal: screenWidth * 0.05,
+                    horizontal: screenWidth * 0.05,
                   ),
                   child: Text(
                     textAlign: TextAlign.center,
@@ -155,7 +158,7 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                     ),
                   ],
                 ),
-                Gaps.v20,
+                Gaps.v10,
                 Column(
                   children: [
                     LayoutBuilder(
@@ -283,7 +286,7 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                     );
                   },
                 ),
-                Gaps.v36,
+                Gaps.v28,
                 LayoutBuilder(
                   builder: (context, constraints) {
                     return Row(
