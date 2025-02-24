@@ -251,7 +251,9 @@ class _HomeScreenState extends State<HomeScreen>
                         height: actualIntakeHeight - 10,
                         decoration: BoxDecoration(
                           color: Color.fromARGB(200, 255, 255, 255),
-                          borderRadius: BorderRadius.all(Radius.circular(22)),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(22),
+                          ),
                         ),
                       ),
                     ),
