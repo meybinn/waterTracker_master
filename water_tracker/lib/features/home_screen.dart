@@ -54,24 +54,6 @@ class _HomeScreenState extends State<HomeScreen>
       });
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // if (intakeProvider.totalIntake >= intakeProvider.intakeGoal) {
-      //   _controller.stop();
-      //   if (mounted) {
-      //     showDialog(
-      //       context: context,
-      //       builder: (context) => AlertDialog(
-      //         title: Text("Achieve!"),
-      //         content: Text("Congratulations! You did it!"),
-      //         actions: [
-      //           TextButton(
-      //             onPressed: () => Navigator.of(context).pop(),
-      //             child: Text("OK"),
-      //           ),
-      //         ],
-      //       ),
-      //     );
-      //   }
-      // }
       _startCoundown();
     });
   }

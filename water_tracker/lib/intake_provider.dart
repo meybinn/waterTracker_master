@@ -91,8 +91,6 @@ class IntakeProvider with ChangeNotifier {
 
   void updateUserInfo(String userId, int age, String gender, double weight,
       double height) async {
-    // await _databaseHelper.updateUserInfo(userId, age, gender, weight, height);
-    // await loadUserData(userId);
     _gender = gender;
     _age = age.toString();
     _height = height.toString();
@@ -117,9 +115,4 @@ class IntakeProvider with ChangeNotifier {
     }
     notifyListeners();
   }
-  // void calculation() {
-  //   _calcul = ;
-
-  //   notifyListeners();
-  // }
 }

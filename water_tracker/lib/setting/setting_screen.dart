@@ -45,8 +45,6 @@ class _SettingScreenState extends State<SettingScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.center,
-          // mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
             Gaps.v20,

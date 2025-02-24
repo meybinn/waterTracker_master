@@ -44,18 +44,7 @@ class _WaterTrackerState extends State<WaterTracker> {
           color: Color(0xFFE0E6FE),
         ),
       ),
-      // home: MainNavigationScreen(tab: 'setting'),
       home: StartScreen(),
-      // home: HistoryScreen(),
-      // home: HomeScreen(),
-      // home: SigninScreen(),
-      // home: SignupScreen(),
-      // home: const SetupProfileScreen(),
-      // home: SettingScreen(),
-      // home: HistoryScreen(),
-      // home: SetUpGoalScreen(),
-      // home: SettingScreen(),
-      // home: SaveGoalScreen(),
     );
   }
 }

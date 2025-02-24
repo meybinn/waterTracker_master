@@ -71,14 +71,6 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
     });
   }
 
-  // void _onNext() {
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(
-  //         builder: (context) => MainNavigationScreen(tab: 'home')),
-  //   );
-  // }
-
   Future<void> _saveGoal() async {
     if (!mounted) return; // 위젯이 여전히 마운트되어 있는지 확인
 
@@ -294,10 +286,6 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                           color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.w500,
                         ),
-                        // labelStyle: GoogleFonts.scheherazadeNew(
-                        //   color: Color(0XFF7C7C7C),
-                        //   fontSize: Sizes.size20,
-                        // ),
                         border: InputBorder.none,
                         suffixIcon: IconButton(
                           icon: Icon(
