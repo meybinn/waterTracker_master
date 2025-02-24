@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
 import 'package:water_tracker/features/main_navigation/main_navigation_screen.dart';
+import 'package:water_tracker/features/set_up/SignUp.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -126,8 +127,25 @@ class _SigninScreenState extends State<SigninScreen> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5),
                         borderSide: const BorderSide(
-                          color: Colors.grey,
-                        ),
+                            color: Color(0xFFDFDCDC), width: 1.5),
+                        gapPadding: Sizes.size2,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: const BorderSide(
+                            color: Color(0xFFDFDCDC), width: 1.5),
+                        gapPadding: Sizes.size2,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: const BorderSide(
+                            color: Color(0xFFDFDCDC), width: 2),
+                        gapPadding: Sizes.size2,
+                      ),
+                      disabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: const BorderSide(
+                            color: Color(0xFFDFDCDC), width: 1.5),
                         gapPadding: Sizes.size2,
                       ),
                       hintText: "Input your email",
@@ -158,8 +176,25 @@ class _SigninScreenState extends State<SigninScreen> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5),
                         borderSide: const BorderSide(
-                          color: Colors.grey,
-                        ),
+                            color: Color(0xFFDFDCDC), width: 1.5),
+                        gapPadding: Sizes.size2,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: const BorderSide(
+                            color: Color(0xFFDFDCDC), width: 1.5),
+                        gapPadding: Sizes.size2,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: const BorderSide(
+                            color: Color(0xFFDFDCDC), width: 2),
+                        gapPadding: Sizes.size2,
+                      ),
+                      disabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: const BorderSide(
+                            color: Color(0xFFDFDCDC), width: 1.5),
                         gapPadding: Sizes.size2,
                       ),
                       hintText: "Input your password",
@@ -208,7 +243,7 @@ class _SigninScreenState extends State<SigninScreen> {
                         color: Colors.black,
                       ),
                       child: Text(
-                        "Sign up",
+                        "Sign in",
                         style: GoogleFonts.scheherazadeNew(
                           color: Color(0xFFE0E6FE),
                           fontSize: Sizes.size20 + Sizes.size2,
