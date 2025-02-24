@@ -41,14 +41,33 @@ class Setup extends StatelessWidget {
               errorText: error,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(5),
-                borderSide: const BorderSide(color: Colors.grey),
-                gapPadding: Sizes.size2,
+                borderSide:
+                    const BorderSide(color: Color(0xFFDFDCDC), width: 1.5),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide:
+                    const BorderSide(color: Color(0xFFDFDCDC), width: 1.5),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide:
+                    const BorderSide(color: Color(0xFFDFDCDC), width: 2),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: const BorderSide(color: Colors.red, width: 1.5),
+              ),
+              disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide:
+                    const BorderSide(color: Color(0xFFDFDCDC), width: 1.5),
               ),
               contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
               hintText: hintText,
               hintStyle: GoogleFonts.scheherazadeNew(
                 fontSize: Sizes.size16,
-                color: Colors.grey,
+                color: Theme.of(context).primaryColor,
                 fontWeight: FontWeight.w400,
               ),
             ),

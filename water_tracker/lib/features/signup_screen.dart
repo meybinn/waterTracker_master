@@ -4,21 +4,20 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
+import 'package:water_tracker/features/set_up/SignUp.dart';
 
 import 'package:water_tracker/features/setup_profile_screen.dart';
 import 'package:water_tracker/intake_provider.dart';
 import 'package:water_tracker/services/database_helper.dart';
 
 class SignupScreen extends StatefulWidget {
-
-  const SignupScreen({ super.key});
+  const SignupScreen({super.key});
 
   @override
   State<SignupScreen> createState() => _SignupScreenState();
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -73,26 +72,33 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   void _onNextTap() async {
-    if (_isEmailValid() != null || _isPasswordValid() != null || email.isEmpty || username.isEmpty || password.isEmpty) return;
+    if (_isEmailValid() != null ||
+        _isPasswordValid() != null ||
+        email.isEmpty ||
+        username.isEmpty ||
+        password.isEmpty) return;
 
-    try{
-     int userId = await DatabaseHelper.instance.insertUser(username, email, password);
-     print("User added with Id: $userId");     
-     
-     context.read<IntakeProvider>().setUsername(username);
+    try {
+      int userId =
+          await DatabaseHelper.instance.insertUser(username, email, password);
+      print("User added with Id: $userId");
+
+      context.read<IntakeProvider>().setUsername(username);
 
       Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const SetupProfileScreen(),
-      ),
-    );
+        context,
+        MaterialPageRoute(
+          builder: (context) => const SetupProfileScreen(),
+        ),
+      );
     } catch (e) {
       print("Error inserting user: $e");
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Error creating account. Try again!"),),);
+        SnackBar(
+          content: Text("Error creating account. Try again!"),
+        ),
+      );
     }
-
   }
 
   void onClearTap() {
@@ -138,63 +144,15 @@ class _SignupScreenState extends State<SignupScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Username",
-                    style: GoogleFonts.scheherazadeNew(
-                      fontSize: Sizes.size20,
-                    ),
-                  ),
-                  Gaps.v10,
-                  TextField(
-                    controller: _usernameController,
-                    decoration: InputDecoration(
-                      filled: true, // 배경색 활성화
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: const BorderSide(
-                          color: Colors.grey,
-                        ),
-                        gapPadding: Sizes.size2,
-                      ),
+                  Signup(
+                      title: "Username",
                       hintText: "Input your name",
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                      hintStyle: GoogleFonts.scheherazadeNew(
-                        fontSize: Sizes.size16,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
+                      controller: _usernameController),
                   Gaps.v10,
-                  Text(
-                    "Email",
-                    style: GoogleFonts.scheherazadeNew(
-                      fontSize: Sizes.size20,
-                    ),
-                  ),
-                  Gaps.v10,
-                  TextField(
+                  Signup(
+                    title: "Email",
+                    hintText: "Input your email",
                     controller: _emailController,
-                    decoration: InputDecoration(
-                      filled: true, // 배경색 활성화
-                      fillColor: Colors.white,
-                      errorText: _isEmailValid(),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: const BorderSide(
-                          color: Colors.grey,
-                        ),
-                        gapPadding: Sizes.size2,
-                      ),
-                      hintText: "Input your email",
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                      hintStyle: GoogleFonts.scheherazadeNew(
-                        fontSize: Sizes.size16,
-                        color: Colors.grey,
-                      ),
-                    ),
                   ),
                   Gaps.v10,
                   Text(
@@ -215,8 +173,31 @@ class _SignupScreenState extends State<SignupScreen> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5),
                         borderSide: const BorderSide(
-                          color: Colors.grey,
-                        ),
+                            color: Color(0xFFDFDCDC), width: 1.5),
+                        gapPadding: Sizes.size2,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: const BorderSide(
+                            color: Color(0xFFDFDCDC), width: 1.5),
+                        gapPadding: Sizes.size2,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: const BorderSide(
+                            color: Color(0xFFDFDCDC), width: 2),
+                        gapPadding: Sizes.size2,
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: Colors.red, width: 1.5),
+                        gapPadding: Sizes.size2,
+                      ),
+                      disabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide: const BorderSide(
+                            color: Color(0xFFDFDCDC), width: 1.5),
                         gapPadding: Sizes.size2,
                       ),
                       hintText: "Input your password",

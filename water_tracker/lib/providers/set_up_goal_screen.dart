@@ -244,10 +244,11 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                         child: TextField(
                           readOnly: true,
                           decoration: InputDecoration(
-                            labelText: "From Time",
-                            labelStyle: GoogleFonts.scheherazadeNew(
-                              color: Color(0XFF7C7C7C),
-                              fontSize: Sizes.size20,
+                            hintText: "From Time",
+                            hintStyle: GoogleFonts.scheherazadeNew(
+                              fontSize: Sizes.size18,
+                              color: Theme.of(context).primaryColor,
+                              fontWeight: FontWeight.w500,
                             ),
                             border: InputBorder.none,
                             suffixIcon: IconButton(
@@ -287,11 +288,16 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                     child: TextField(
                       readOnly: true,
                       decoration: InputDecoration(
-                        labelText: "To Time",
-                        labelStyle: GoogleFonts.scheherazadeNew(
-                          color: Color(0XFF7C7C7C),
-                          fontSize: Sizes.size20,
+                        hintText: "To Time",
+                        hintStyle: GoogleFonts.scheherazadeNew(
+                          fontSize: Sizes.size18,
+                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.w500,
                         ),
+                        // labelStyle: GoogleFonts.scheherazadeNew(
+                        //   color: Color(0XFF7C7C7C),
+                        //   fontSize: Sizes.size20,
+                        // ),
                         border: InputBorder.none,
                         suffixIcon: IconButton(
                           icon: Icon(
@@ -326,10 +332,11 @@ class _SetUpGoalScreenState extends State<SetUpGoalScreen> {
                     child: TextField(
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
-                        labelText: "Interval (hour)",
-                        labelStyle: GoogleFonts.scheherazadeNew(
-                          color: Color(0XFF7C7C7C),
-                          fontSize: Sizes.size20,
+                        hintText: "Interval (hour)",
+                        hintStyle: GoogleFonts.scheherazadeNew(
+                          fontSize: Sizes.size18,
+                          color: Theme.of(context).primaryColor,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                       onChanged: (value) {
