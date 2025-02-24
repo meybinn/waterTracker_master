@@ -112,7 +112,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   return ListTile(
                     leading: Padding(
                       padding: EdgeInsets.only(
-                        left: 20,
+                        left: 20, 
                       ),
                       child: FaIcon(
                         FontAwesomeIcons.glassWater,
