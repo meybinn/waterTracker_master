@@ -34,9 +34,7 @@ class _SettingScreenState extends State<SettingScreen> {
     intakeProvider.loadUserData(intakeProvider.userId);
 
     intakeProvider.addListener(() {
-      setState(() {
-        
-      });
+      setState(() {});
     });
   }
 
@@ -124,7 +122,7 @@ class _SettingScreenState extends State<SettingScreen> {
                             builder: (context) => AlertDialog(
                               title: Text("⚠️ALERT⚠️"),
                               content: Text(
-                                  "Are you sure you want to turn on the alarm?"),
+                                  "Are you sure you want to turn on the notification?"),
                               actions: [
                                 TextButton(
                                   onPressed: () => {
