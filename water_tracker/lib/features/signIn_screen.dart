@@ -67,7 +67,7 @@ class _SigninScreenState extends State<SigninScreen> {
   String? _isPasswordValid() {
     if (password.isEmpty) return null;
     if (password.length < 9 || password.length > 20) {
-      return "your password should be 9 to 20";
+      return "your password should be 8 to 20";
     }
     return null;
   }

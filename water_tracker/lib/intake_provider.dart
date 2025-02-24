@@ -56,14 +56,14 @@ class IntakeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void setUserId(String userId){
+  void setUserId(String userId) {
     _userId = userId;
     notifyListeners();
   }
 
-  Future<void> loadUserData(String userId) async{
+  Future<void> loadUserData(String userId) async {
     final userSettings = await _databaseHelper.getUserSettings(userId);
-    if(userSettings != null){
+    if (userSettings != null) {
       _username = userSettings['username'] ?? "";
       _gender = userSettings['gender'] ?? "";
       _age = userSettings['age'].toString() ?? "";
@@ -85,18 +85,18 @@ class IntakeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateUserInfo(String userId, int age, String gender, double weight, double height) async {
+  void updateUserInfo(String userId, int age, String gender, double weight,
+      double height) async {
     // await _databaseHelper.updateUserInfo(userId, age, gender, weight, height);
     // await loadUserData(userId);
-    this._gender = gender;
-    this._age = age.toString();
-    this._height = height.toString();
-    this._weight = weight.toString();
+    _gender = gender;
+    _age = age.toString();
+    _height = height.toString();
+    _weight = weight.toString();
 
     notifyListeners();
-
   }
-  
+
   void updateGoal(int intake, int time) {
     _intakeGoal = intake;
     _interval = time;
@@ -104,9 +104,9 @@ class IntakeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void addIntakeHistory(int intakeAmount){
+  void addIntakeHistory(int intakeAmount) {
     DateTime today = DateTime.now();
-    if(_intakeHistory.containsKey(today)){
+    if (_intakeHistory.containsKey(today)) {
       _intakeHistory[today]!.add('$intakeAmount ml');
     } else {
       _intakeHistory[today] = ['$intakeAmount ml'];

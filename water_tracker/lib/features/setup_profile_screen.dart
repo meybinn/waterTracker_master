@@ -133,12 +133,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(
-          top: Sizes.size28,
-          right: 120,
-          left: 120,
-          bottom: 150,
-        ),
+        padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 80),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -170,7 +165,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
               controller: weightController,
               error: isWeightValid(),
             ),
-            Gaps.v24,
+            Gaps.v32,
             GestureDetector(
               onTap: onNextTap,
               child: Container(

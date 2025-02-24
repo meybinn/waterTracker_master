@@ -44,149 +44,169 @@ class _SettingScreenState extends State<SettingScreen> {
 
     return Scaffold(
       body: SingleChildScrollView(
-        child: Align(
-          alignment: Alignment(0.0, -0.9),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Gaps.v20,
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 12),
-                child: Icon(
-                  Icons.account_circle_outlined,
-                  size: 120,
-                  color: const Color(0XCC7C7C7C),
-                ),
+        child: Column(
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Gaps.v20,
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 12),
+              child: Icon(
+                Icons.account_circle_outlined,
+                size: 120,
+                color: const Color(0XCC7C7C7C),
               ),
-              Gaps.v1,
-              Text(
-                intakeProvider.username ?? "Username", // 값이 없으면 기본값
-                style: GoogleFonts.scheherazadeNew(
-                  color: const Color(0XFF7C7C7C),
-                  fontSize: Sizes.size26,
-                  fontWeight: FontWeight.bold,
-                ),
+            ),
+            Gaps.v1,
+            Text(
+              intakeProvider.username ?? "Username", // 값이 없으면 기본값
+              style: GoogleFonts.scheherazadeNew(
+                color: const Color(0XFF7C7C7C),
+                fontSize: Sizes.size26,
+                fontWeight: FontWeight.bold,
               ),
-              Gaps.v20,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            ),
+            Gaps.v20,
+            Padding(
+              padding: const EdgeInsets.only(left: 48),
+              child: Column(
+                // crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  _buildInfoColumn(intakeProvider.gender ?? "N/A", "gender"),
-                  _buildInfoColumn(intakeProvider.age ?? "N/A", "age"),
-                ],
-              ),
-              Gaps.v20,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _buildInfoColumn(
-                      intakeProvider.height ?? "N/A", "height (cm)"),
-                  _buildInfoColumn(
-                      intakeProvider.weight ?? "N/A", "weight (kg)"),
-                ],
-              ),
-              Gaps.v20,
-              _buildInfoColumn(
-                "${intakeProvider.intakeGoal ?? 0}",
-                "intake goal (ml)",
-                isCentered: true,
-              ),
-              Gaps.v28,
-              const Divider(
-                color: Color(0XFF7C7C7C),
-                thickness: 1,
-                indent: 40,
-                endIndent: 40,
-              ),
-              Gaps.v14,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    "Allow notification",
-                    style: GoogleFonts.scheherazadeNew(
-                      color: const Color(0XFF7C7C7C),
-                      fontSize: Sizes.size24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                          width: 120,
+                          child: _buildInfoColumn(
+                              intakeProvider.gender ?? "N/A", "gender")),
+                      SizedBox(width: 40),
+                      SizedBox(
+                          width: 120,
+                          child: _buildInfoColumn(
+                              intakeProvider.age ?? "N/A", "age")),
+                    ],
                   ),
-                  Transform.scale(
-                    scale: 0.8,
-                    child: Switch(
-                      value: context.read<IntakeProvider>().isNotification,
-                      onChanged: (bool value) {
-                        // 알람 킬 때
-                        if (!context.read<IntakeProvider>().isNotification) {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: Text("⚠️ALERT⚠️"),
-                              content: Text(
-                                  "Are you sure you want to turn on the notification?"),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => {
-                                    Navigator.of(context).pop(),
-                                    context
-                                        .read<IntakeProvider>()
-                                        .setNotification(value),
-                                  },
-                                  child: Text(
-                                    "OK",
-                                    style: TextStyle(color: Color(0XFF4C89B2)),
-                                  ),
-                                ),
-                                TextButton(
-                                    onPressed: () => {
-                                          Navigator.of(context).pop(),
-                                        },
-                                    style: TextButton.styleFrom(),
-                                    child: Text(
-                                      "NO",
-                                      style: TextStyle(
-                                          color:
-                                              Theme.of(context).primaryColor),
-                                    )),
-                              ],
-                            ),
-                          );
-                          // 알람 끌 때
-                        } else {
-                          context.read<IntakeProvider>().setNotification(value);
-                        }
-                      },
-                      activeColor: const Color(0XFF4C89B2),
-                    ),
+                  Gaps.v32,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 120,
+                        child: _buildInfoColumn(
+                            intakeProvider.height ?? "N/A", "height (cm)"),
+                      ),
+                      SizedBox(width: 40),
+                      SizedBox(
+                        width: 120,
+                        child: _buildInfoColumn(
+                            intakeProvider.weight ?? "N/A", "weight (kg)"),
+                      ),
+                    ],
                   ),
                 ],
               ),
-              Gaps.v16,
-              GestureDetector(
-                onTap: () => showLogoutDialog(context),
-                child: Text(
-                  "Log out",
+            ),
+            Gaps.v20,
+            _buildInfoColumn(
+              "${intakeProvider.intakeGoal ?? 0}",
+              "intake goal (ml)",
+              isCentered: true,
+            ),
+            Gaps.v28,
+            const Divider(
+              color: Color(0XFF7C7C7C),
+              thickness: 1,
+              indent: 40,
+              endIndent: 40,
+            ),
+            Gaps.v14,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  "Allow notification",
                   style: GoogleFonts.scheherazadeNew(
-                    color: const Color(0XFFEB6F6F),
-                    fontSize: Sizes.size32,
+                    color: const Color(0XFF7C7C7C),
+                    fontSize: Sizes.size24,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "really want to log out?",
-                    style: GoogleFonts.scheherazadeNew(
-                      color: const Color(0XFF9B9CA4),
-                      fontSize: Sizes.size18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                Transform.scale(
+                  scale: 0.8,
+                  child: Switch(
+                    value: context.read<IntakeProvider>().isNotification,
+                    onChanged: (bool value) {
+                      // 알람 킬 때
+                      if (!context.read<IntakeProvider>().isNotification) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text("⚠️ALERT⚠️"),
+                            content: Text(
+                                "Are you sure you want to turn on the notification?"),
+                            actions: [
+                              TextButton(
+                                onPressed: () => {
+                                  Navigator.of(context).pop(),
+                                  context
+                                      .read<IntakeProvider>()
+                                      .setNotification(value),
+                                },
+                                child: Text(
+                                  "OK",
+                                  style: TextStyle(color: Color(0XFF4C89B2)),
+                                ),
+                              ),
+                              TextButton(
+                                  onPressed: () => {
+                                        Navigator.of(context).pop(),
+                                      },
+                                  style: TextButton.styleFrom(),
+                                  child: Text(
+                                    "NO",
+                                    style: TextStyle(
+                                        color: Theme.of(context).primaryColor),
+                                  )),
+                            ],
+                          ),
+                        );
+                        // 알람 끌 때
+                      } else {
+                        context.read<IntakeProvider>().setNotification(value);
+                      }
+                    },
+                    activeColor: const Color(0XFF4C89B2),
                   ),
-                ],
+                ),
+              ],
+            ),
+            Gaps.v16,
+            GestureDetector(
+              onTap: () => showLogoutDialog(context),
+              child: Text(
+                "Log out",
+                style: GoogleFonts.scheherazadeNew(
+                  color: const Color(0XFFEB6F6F),
+                  fontSize: Sizes.size32,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ],
-          ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "really want to log out?",
+                  style: GoogleFonts.scheherazadeNew(
+                    color: const Color(0XFF9B9CA4),
+                    fontSize: Sizes.size18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

@@ -116,7 +116,7 @@ class _AddIntakeState extends State<AddIntake> {
                                 ),
                               ),
                               Text(
-                                "each tab added 190ml",
+                                "each tab added 150ml",
                                 style: GoogleFonts.righteous(
                                   fontSize: screenWidth * 0.03,
                                   color: Theme.of(context).primaryColor,
