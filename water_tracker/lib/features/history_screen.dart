@@ -42,8 +42,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
             entry.key.year == _selectedDate.year &&
             entry.key.month == _selectedDate.month &&
             entry.key.day == _selectedDate.day)
-        .map((entry) => 
-        entry.value.join('. '))
+        .map((entry) => entry.value.join('. '))
         .toList();
         
       if(dailyRecords.isEmpty){
@@ -111,7 +110,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   return ListTile(
                     leading: Padding(
                       padding: EdgeInsets.only(
-                        left: 20,
+                        left: 20, 
                       ),
                       child: FaIcon(
                         FontAwesomeIcons.glassWater,
