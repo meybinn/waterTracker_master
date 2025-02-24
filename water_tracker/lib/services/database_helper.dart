@@ -216,6 +216,19 @@ class DatabaseHelper {
     );
   }
 
+// reset intake
+  Future<void> resetWaterIntake(String userId) async {
+    final db = await database;
+
+    // 오늘 날짜로 필터링하여 해당 사용자의 섭취 기록 삭제
+    String today = DateTime.now().toIso8601String().split('T')[0];
+    await db.delete(
+      'water_intake',
+      where: 'user_id = ? AND timestamp LIKE ?',
+      whereArgs: [userId, '$today%'],
+    );
+  }
+
 // get user settings
   Future<Map<String, dynamic>?> getUserSetting(String userId) async {
     final db = await database;

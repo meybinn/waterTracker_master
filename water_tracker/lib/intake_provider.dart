@@ -44,8 +44,11 @@ class IntakeProvider with ChangeNotifier {
     notifyListeners(); // 업데이트
   }
 
-  void resetIntake() {
+  Future<void> resetIntake() async {
     _totalIntake = 0;
+
+// 데이터베이스에서도 섭취 기록 초기화
+    await _databaseHelper.resetWaterIntake(_userId);
 
     notifyListeners();
   }
