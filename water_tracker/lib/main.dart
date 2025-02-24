@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:water_tracker/features/main_navigation/main_navigation_screen.dart';
 import 'package:water_tracker/features/start_screen.dart';
-
 import 'package:water_tracker/intake_provider.dart';
 import 'package:water_tracker/notification/notification.dart';
-import 'package:water_tracker/setting/setting_screen.dart';
 
 void main() {
   runApp(

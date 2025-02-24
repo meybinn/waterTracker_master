@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
+import 'package:water_tracker/features/set_up/home_widgets.dart';
 import 'package:water_tracker/intake_provider.dart';
 import 'package:water_tracker/notification/notification.dart';
 
@@ -32,11 +33,10 @@ class _HomeScreenState extends State<HomeScreen>
   bool isStop = false;
   bool noti = false;
 
-  void _addwater(int intakeAmount) async{
+  void _addwater(int intakeAmount) async {
     final intakeProvider = context.read<IntakeProvider>();
-    intakeProvider.updateIntake(intakeAmount);        //intake total 업데이트
-    intakeProvider.addIntakeHistory(intakeAmount);    //history에서 intake 기록 
-
+    intakeProvider.updateIntake(intakeAmount); //intake total 업데이트
+    intakeProvider.addIntakeHistory(intakeAmount); //history에서 intake 기록
   }
 
   @override
@@ -54,26 +54,24 @@ class _HomeScreenState extends State<HomeScreen>
       });
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final intakeProvider = context.read<IntakeProvider>();
-
-      if (intakeProvider.totalIntake >= intakeProvider.intakeGoal) {
-        _controller.stop();
-        if (mounted) {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text("Achieve!"),
-              content: Text("Congratulations! You did it!"),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: Text("OK"),
-                ),
-              ],
-            ),
-          );
-        }
-      }
+      // if (intakeProvider.totalIntake >= intakeProvider.intakeGoal) {
+      //   _controller.stop();
+      //   if (mounted) {
+      //     showDialog(
+      //       context: context,
+      //       builder: (context) => AlertDialog(
+      //         title: Text("Achieve!"),
+      //         content: Text("Congratulations! You did it!"),
+      //         actions: [
+      //           TextButton(
+      //             onPressed: () => Navigator.of(context).pop(),
+      //             child: Text("OK"),
+      //           ),
+      //         ],
+      //       ),
+      //     );
+      //   }
+      // }
       _startCoundown();
     });
   }
@@ -159,6 +157,7 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     int intakeGoal = context.watch<IntakeProvider>().intakeGoal;
     int intakeReal = context.watch<IntakeProvider>().totalIntake;
+    final intakeProvider = context.read<IntakeProvider>();
 
     double outerConHeight = MediaQuery.of(context).size.height * 0.4 + 60;
     if (outerConHeight <= 0) {
@@ -269,58 +268,21 @@ class _HomeScreenState extends State<HomeScreen>
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Column(
-                    children: [
-                      Text(
-                        "${context.watch<IntakeProvider>().calcul} %",
-                        style: GoogleFonts.righteous(
-                          fontSize: Sizes.size28,
-                          color: Color(0XFF7C7C7C),
-                        ),
-                      ),
-                      Text(
-                        "Progress",
-                        style: GoogleFonts.righteous(
-                          fontSize: Sizes.size16,
-                          color: Color(0XFF7C7C7C),
-                        ),
-                      ),
-                      Text(
-                        "",
-                        style: GoogleFonts.righteous(
-                          fontSize: Sizes.size14,
-                          color: Color(0XCC7C7C7C),
-                        ),
-                      ),
-                    ],
+                  HomeWidgets(
+                    title: "${context.watch<IntakeProvider>().calcul} %",
+                    text: "Progress",
+                    bool: (intakeProvider.totalIntake >=
+                            intakeProvider.intakeGoal)
+                        ? "Achieve!"
+                        : "Incomplete",
                   ),
                   Gaps.h32,
-                  Column(
-                    children: [
-                      Text(
-                        formatCountdown,
-                        style: GoogleFonts.righteous(
-                          fontSize: Sizes.size28,
-                          color: Color(0XFF7C7C7C),
-                        ),
-                      ),
-                      Text(
-                        "Reminder",
-                        style: GoogleFonts.righteous(
-                          fontSize: Sizes.size16,
-                          color: Color(0XFF7C7C7C),
-                        ),
-                      ),
-                      Text(
-                        context.read<IntakeProvider>().isNotification
-                            ? "on"
-                            : "off",
-                        style: GoogleFonts.righteous(
-                          fontSize: Sizes.size14,
-                          color: Color(0XCC7C7C7C),
-                        ),
-                      ),
-                    ],
+                  HomeWidgets(
+                    title: formatCountdown,
+                    text: "Reminder",
+                    bool: context.read<IntakeProvider>().isNotification
+                        ? "on"
+                        : "off",
                   ),
                 ],
               )

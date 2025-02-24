@@ -38,7 +38,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
     final intakeHistory = context.watch<IntakeProvider>().intakeHistory;
 
     List<String> dailyRecords = intakeHistory.entries
-    .where((entry) =>
+        .where((entry) =>
             entry.key.year == _selectedDate.year &&
             entry.key.month == _selectedDate.month &&
             entry.key.day == _selectedDate.day)
@@ -80,7 +80,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     initialDate: _selectedDate,
                     firstDate: DateTime(2000),
                     lastDate: DateTime(2030),
-                    onDateChanged: (newDate){
+                    onDateChanged: (newDate) {
                       setState(() {
                         _selectedDate = newDate;
                       });
