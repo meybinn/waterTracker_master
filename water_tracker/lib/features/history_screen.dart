@@ -22,7 +22,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
   //   setState(() {
   //     _selectedDate = newDate;
 
-  //     bool dataExist = intakeHistory.keys.any((date) =>
+  //     bool dataExist = _intakeHistory.keys.any((date) =>
   //         date.year == newDate.year &&
   //         date.month == newDate.month &&
   //         date.day == newDate.day);
@@ -42,8 +42,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
             entry.key.year == _selectedDate.year &&
             entry.key.month == _selectedDate.month &&
             entry.key.day == _selectedDate.day)
-        .map((entry) => entry.value.join('. '))
+        .map((entry) => 
+        entry.value.join('. '))
         .toList();
+        
+      if(dailyRecords.isEmpty){
+        dailyRecords.add("0 ml");
+      }
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -80,7 +85,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     initialDate: _selectedDate,
                     firstDate: DateTime(2000),
                     lastDate: DateTime(2030),
-                    onDateChanged: (newDate){
+                    onDateChanged: (newDate) {
                       setState(() {
                         _selectedDate = newDate;
                       });
@@ -92,11 +97,12 @@ class _HistoryScreenState extends State<HistoryScreen> {
               ListView.separated(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: intakeHistory.length,
+                itemCount: dailyRecords.length,
                 separatorBuilder: (context, index) => Divider(),
                 itemBuilder: (context, index) {
                   DateTime date = intakeHistory.keys.elementAt(index);
                   String formatDate = "${date.month}/${date.day}";
+                  String formatTime = "${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}";
                   return ListTile(
                     leading: Padding(
                       padding: EdgeInsets.only(
@@ -105,26 +111,28 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       child: FaIcon(
                         FontAwesomeIcons.glassWater,
                         color: Color(0XFF7C7C7C),
+                        size: 20,
                       ),
                     ),
                     title: Padding(
                       padding: EdgeInsets.only(
-                        left: 40,
+                        left: 30,
                       ),
                       child: Text(
-                        formatDate,
+                        "$formatDate - $formatTime",
                         style: GoogleFonts.righteous(
-                            color: Color(0XFF7C7C7C), fontSize: Sizes.size20),
+                            color: Color(0XFF7C7C7C), fontSize: Sizes.size16 + Sizes.size2),
                       ),
                     ),
                     trailing: Padding(
                       padding: EdgeInsets.only(
-                        right: 40,
+                        right: 20,
                       ),
                       child: Text(
-                        intakeHistory[date]!.join('. '),
+                        // intakeHistory[date]!.join('. '),
+                        dailyRecords[index],
                         style: GoogleFonts.righteous(
-                            color: Color(0XFF7C7C7C), fontSize: Sizes.size20),
+                            color: Color(0XFF7C7C7C), fontSize: Sizes.size16 + Sizes.size2),
                       ),
                     ),
                   );
