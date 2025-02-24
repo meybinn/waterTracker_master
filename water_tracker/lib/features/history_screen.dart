@@ -49,6 +49,12 @@ class _HistoryScreenState extends State<HistoryScreen> {
       dailyRecords.add("0 ml");
     }
 
+    // add에서 reset 누르면 List의 값들 삭제
+    if (context.read<IntakeProvider>().totalIntake == 0) {
+      dailyRecords.clear();
+      dailyRecords.add("0 ml");
+    }
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
@@ -112,7 +118,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   return ListTile(
                     leading: Padding(
                       padding: EdgeInsets.only(
-                        left: 20, 
+                        left: 20,
                       ),
                       child: FaIcon(
                         FontAwesomeIcons.glassWater,
