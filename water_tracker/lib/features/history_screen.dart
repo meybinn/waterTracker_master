@@ -48,6 +48,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
+        automaticallyImplyLeading: false, // 자동으로 생성되는 뒤로가기 버튼 제거
         title: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Text(

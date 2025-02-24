@@ -30,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen>
   String date = DateFormat('MMMM d, yyyy').format(DateTime.now());
 
   bool isStop = false;
+  bool noti = false;
 
   void _addwater(int intakeAmount) async{
     final intakeProvider = context.read<IntakeProvider>();
@@ -104,6 +105,44 @@ class _HomeScreenState extends State<HomeScreen>
         }
       } else {
         timer.cancel();
+
+        if (context.read<IntakeProvider>().isNotification) {
+          FlutterLocalNotification.showNotification();
+        }
+
+        setState(() {
+          noti = true;
+        });
+
+        Future.delayed(Duration(seconds: 2), () {
+          if (mounted) {
+            setState(() {
+              noti = false;
+            });
+          }
+        });
+
+        if (mounted) {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (context) => AlertDialog(
+              title: Text('WATER REMINDER!!'),
+              content: Text('Time to drink water!! Stay hydrated💧'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    // 기존 interval로 다시 카운트다운 시작
+                    _startCoundown();
+                  },
+                  child: Text("OK"),
+                ),
+              ],
+            ),
+          );
+        }
+
         _startCoundown();
       }
     });
@@ -246,6 +285,13 @@ class _HomeScreenState extends State<HomeScreen>
                           color: Color(0XFF7C7C7C),
                         ),
                       ),
+                      Text(
+                        "",
+                        style: GoogleFonts.righteous(
+                          fontSize: Sizes.size14,
+                          color: Color(0XCC7C7C7C),
+                        ),
+                      ),
                     ],
                   ),
                   Gaps.h32,
@@ -263,6 +309,15 @@ class _HomeScreenState extends State<HomeScreen>
                         style: GoogleFonts.righteous(
                           fontSize: Sizes.size16,
                           color: Color(0XFF7C7C7C),
+                        ),
+                      ),
+                      Text(
+                        context.read<IntakeProvider>().isNotification
+                            ? "on"
+                            : "off",
+                        style: GoogleFonts.righteous(
+                          fontSize: Sizes.size14,
+                          color: Color(0XCC7C7C7C),
                         ),
                       ),
                     ],

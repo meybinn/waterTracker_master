@@ -34,9 +34,7 @@ class _SettingScreenState extends State<SettingScreen> {
     intakeProvider.loadUserData(intakeProvider.userId);
 
     intakeProvider.addListener(() {
-      setState(() {
-        
-      });
+      setState(() {});
     });
   }
 
@@ -115,11 +113,47 @@ class _SettingScreenState extends State<SettingScreen> {
                   Transform.scale(
                     scale: 0.8,
                     child: Switch(
-                      value: isNotificationEnabled,
+                      value: context.read<IntakeProvider>().isNotification,
                       onChanged: (bool value) {
-                        setState(() {
-                          isNotificationEnabled = value;
-                        });
+                        // 알람 킬 때
+                        if (!context.read<IntakeProvider>().isNotification) {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text("⚠️ALERT⚠️"),
+                              content: Text(
+                                  "Are you sure you want to turn on the notification?"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => {
+                                    Navigator.of(context).pop(),
+                                    context
+                                        .read<IntakeProvider>()
+                                        .setNotification(value),
+                                  },
+                                  child: Text(
+                                    "OK",
+                                    style: TextStyle(color: Color(0XFF4C89B2)),
+                                  ),
+                                ),
+                                TextButton(
+                                    onPressed: () => {
+                                          Navigator.of(context).pop(),
+                                        },
+                                    style: TextButton.styleFrom(),
+                                    child: Text(
+                                      "NO",
+                                      style: TextStyle(
+                                          color:
+                                              Theme.of(context).primaryColor),
+                                    )),
+                              ],
+                            ),
+                          );
+                          // 알람 끌 때
+                        } else {
+                          context.read<IntakeProvider>().setNotification(value);
+                        }
                       },
                       activeColor: const Color(0XFF4C89B2),
                     ),

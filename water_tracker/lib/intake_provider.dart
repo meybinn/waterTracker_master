@@ -5,6 +5,8 @@ class IntakeProvider with ChangeNotifier {
   final DatabaseHelper _databaseHelper = DatabaseHelper.instance;
   final Map<DateTime, List<String>> _intakeHistory = {};
 
+  bool _isNotification = false;
+
   String _userId = "";
 
   int _totalIntake = 0;
@@ -27,6 +29,13 @@ class IntakeProvider with ChangeNotifier {
   int get interval => _interval;
   int get calcul => (totalIntake / intakeGoal * 100).floor();
   Map<DateTime, List<String>> get intakeHistory => _intakeHistory;
+
+  bool get isNotification => _isNotification;
+
+  void setNotification(bool value) {
+    _isNotification = value;
+    notifyListeners();
+  }
 
   void updateIntake(int intake) {
     _totalIntake += intake;
