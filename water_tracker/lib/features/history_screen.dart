@@ -95,8 +95,16 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 itemCount: intakeHistory.length,
                 separatorBuilder: (context, index) => Divider(),
                 itemBuilder: (context, index) {
-                  DateTime date = intakeHistory.keys.elementAt(index);
+                  DateTime date = intakeHistory.keys.firstWhere(
+                      (entry) =>
+                          entry.year == _selectedDate.year &&
+                          entry.month == _selectedDate.month &&
+                          entry.day == _selectedDate.day,
+                      orElse: () => DateTime.now());
+
                   String formatDate = "${date.month}/${date.day}";
+                  String formatTime =
+                      "${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}";
                   return ListTile(
                     leading: Padding(
                       padding: EdgeInsets.only(
