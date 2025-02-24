@@ -121,8 +121,8 @@ class DatabaseHelper {
   }
 
 // setUpGoalScreen 기능 : insert
-  Future<int> insertOrUpdateGoal(String userId, int intakeGoal, TimeOfDay fromTime,
-      TimeOfDay toTime, int interval) async {
+  Future<int> insertOrUpdateGoal(String userId, int intakeGoal,
+      TimeOfDay fromTime, TimeOfDay toTime, int interval) async {
     final db = await database;
 
     // 기존 목표 확인
@@ -217,15 +217,15 @@ class DatabaseHelper {
   }
 
 // get user settings
-Future<Map<String, dynamic>?> getUserSetting(String userId) async{
-  final db = await database;
-  final List<Map<String, dynamic>> result = await db.query(
-    'setting',
-    where: 'user_id = ?',
-    whereArgs: [userId],
-  );
-  return result.isNotEmpty ? result.first : null;
-}
+  Future<Map<String, dynamic>?> getUserSetting(String userId) async {
+    final db = await database;
+    final List<Map<String, dynamic>> result = await db.query(
+      'setting',
+      where: 'user_id = ?',
+      whereArgs: [userId],
+    );
+    return result.isNotEmpty ? result.first : null;
+  }
 
 // saveGoalScreen 기능 : update
   Future<int> updateGoal(String userId, int intakeGoal, String fromTime,
@@ -256,12 +256,12 @@ Future<Map<String, dynamic>?> getUserSetting(String userId) async{
   }
 
 //closing database
-Future<void> closeDatabase() async {
-  final db = _database;
-  if(db != null){
-    await db.close();
+  Future<void> closeDatabase() async {
+    final db = _database;
+    if (db != null) {
+      await db.close();
+    }
   }
-}
 
 //setting screen 기능: 업데이트
   Future<int> updateUserSettings(String userId, int age, String gender,
