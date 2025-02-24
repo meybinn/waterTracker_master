@@ -3,6 +3,7 @@ import 'package:water_tracker/services/database_helper.dart';
 
 class IntakeProvider with ChangeNotifier {
   final DatabaseHelper _databaseHelper = DatabaseHelper.instance;
+  final Map<DateTime, List<String>> _intakeHistory = {};
 
   String _userId = "";
 
@@ -25,9 +26,11 @@ class IntakeProvider with ChangeNotifier {
   int get intakeGoal => _intakeGoal;
   int get interval => _interval;
   int get calcul => (totalIntake / intakeGoal * 100).floor();
+  Map<DateTime, List<String>> get intakeHistory => _intakeHistory;
 
   void updateIntake(int intake) {
     _totalIntake += intake;
+    addIntakeHistory(intake);
 
     notifyListeners(); // 업데이트
   }
@@ -84,7 +87,6 @@ class IntakeProvider with ChangeNotifier {
     notifyListeners();
 
   }
-
   
   void updateGoal(int intake, int time) {
     _intakeGoal = intake;
@@ -93,6 +95,16 @@ class IntakeProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void addIntakeHistory(int intakeAmount){
+    DateTime today = DateTime.now();
+    if(_intakeHistory.containsKey(today)){
+      _intakeHistory[today]!.add('$intakeAmount ml');
+    } else {
+      _intakeHistory[today] = ['$intakeAmount ml'];
+    }
+
+    notifyListeners();
+  }
   // void calculation() {
   //   _calcul = ;
 

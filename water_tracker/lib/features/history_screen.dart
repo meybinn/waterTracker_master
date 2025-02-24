@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
+import 'package:water_tracker/intake_provider.dart';
 
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
@@ -14,27 +16,29 @@ class HistoryScreen extends StatefulWidget {
 class _HistoryScreenState extends State<HistoryScreen> {
   DateTime _selectedDate = DateTime.now();
 
-  final Map<DateTime, List<String>> _intakeWater = {};
+  // final Map<DateTime, List<String>> _intakeHistory = {};
 
-  void _updateDate(DateTime newDate) {
-    setState(() {
-      _selectedDate = newDate;
+  // void _updateDate(DateTime newDate) {
+  //   setState(() {
+  //     _selectedDate = newDate;
 
-      bool dataExist = _intakeWater.keys.any((date) =>
-          date.year == newDate.year &&
-          date.month == newDate.month &&
-          date.day == newDate.day);
+  //     bool dataExist = intakeHistory.keys.any((date) =>
+  //         date.year == newDate.year &&
+  //         date.month == newDate.month &&
+  //         date.day == newDate.day);
 
-      if (!dataExist) {
-        _intakeWater[newDate] = ['0 ml'];
-      }
-    });
-  }
+  //     if (!dataExist) {
+  //       _intakeHistory[newDate] = ['0 ml'];
+  //     }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
-    List<String> dailyRecords = _intakeWater.entries
-        .where((entry) =>
+    final intakeHistory = context.watch<IntakeProvider>().intakeHistory;
+
+    List<String> dailyRecords = intakeHistory.entries
+    .where((entry) =>
             entry.key.year == _selectedDate.year &&
             entry.key.month == _selectedDate.month &&
             entry.key.day == _selectedDate.day)
@@ -75,7 +79,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     initialDate: _selectedDate,
                     firstDate: DateTime(2000),
                     lastDate: DateTime(2030),
-                    onDateChanged: _updateDate,
+                    onDateChanged: (newDate){
+                      setState(() {
+                        _selectedDate = newDate;
+                      });
+                    },
                   ),
                 ),
               ),
@@ -83,10 +91,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
               ListView.separated(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: _intakeWater.length,
+                itemCount: intakeHistory.length,
                 separatorBuilder: (context, index) => Divider(),
                 itemBuilder: (context, index) {
-                  DateTime date = _intakeWater.keys.elementAt(index);
+                  DateTime date = intakeHistory.keys.elementAt(index);
                   String formatDate = "${date.month}/${date.day}";
                   return ListTile(
                     leading: Padding(
@@ -113,7 +121,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         right: 40,
                       ),
                       child: Text(
-                        _intakeWater[date]!.join('. '),
+                        intakeHistory[date]!.join('. '),
                         style: GoogleFonts.righteous(
                             color: Color(0XFF7C7C7C), fontSize: Sizes.size20),
                       ),

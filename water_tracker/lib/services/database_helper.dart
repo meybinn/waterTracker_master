@@ -280,19 +280,19 @@ Future<void> closeDatabase() async {
     );
   }
 
-// // 전체 intake  get
-//   Future<int> getTotalIntake(int userId) async {
-//     final db = await database;
-//     final List<Map<String, dynamic>> result = await db.query(
-//       'water_intake',
-//       where: 'user_id = ?',
-//       whereArgs: [userId],
-//     );
+// 전체 intake  get
+  Future<int> getTotalIntake(int userId) async {
+    final db = await database;
+    final List<Map<String, dynamic>> result = await db.query(
+      'water_intake',
+      where: 'user_id = ?',
+      whereArgs: [userId],
+    );
 
-//     int total =
-//         result.fold(0, (sum, item) => sum + (item['TotalIntake'] as int));
-//     return total;
-//   }
+    int total =
+        result.fold(0, (sum, item) => sum + (item['TotalIntake'] as int));
+    return total;
+  }
 
 // // history screen 닫기
 //   Future<List<Map<String, dynamic>>> getHistory(int userId) async {

@@ -31,6 +31,13 @@ class _HomeScreenState extends State<HomeScreen>
 
   bool isStop = false;
 
+  void _addwater(int intakeAmount) async{
+    final intakeProvider = context.read<IntakeProvider>();
+    intakeProvider.updateIntake(intakeAmount);        //intake total 업데이트
+    intakeProvider.addIntakeHistory(intakeAmount);    //history에서 intake 기록 
+
+  }
+
   @override
   void initState() {
     super.initState();
