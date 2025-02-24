@@ -181,7 +181,7 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                           child: TextField(
                             readOnly: true,
                             decoration: InputDecoration(
-                              labelText: "From Time",
+                              hintText: "From Time",
                               labelStyle: GoogleFonts.scheherazadeNew(
                                 color: Color(0XFF7C7C7C),
                                 fontSize: Sizes.size20,
@@ -228,7 +228,7 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                       child: TextField(
                         readOnly: true,
                         decoration: InputDecoration(
-                          labelText: "To Time",
+                          hintText: "To Time",
                           labelStyle: GoogleFonts.scheherazadeNew(
                             color: Color(0XFF7C7C7C),
                             fontSize: Sizes.size20,
@@ -271,7 +271,7 @@ class _SaveGoalScreenState extends State<SaveGoalScreen> {
                       child: TextField(
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          labelText: "Interval (hour)",
+                          hintText: "Interval (hour)",
                           labelStyle: GoogleFonts.scheherazadeNew(
                             color: Color(0XFF7C7C7C),
                             fontSize: Sizes.size20,
