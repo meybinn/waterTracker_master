@@ -30,26 +30,27 @@ class Setup extends StatelessWidget {
           ),
         ),
         Gaps.v12,
-        TextField(
-          controller: controller,
-          textAlign: TextAlign.center,
-          decoration: InputDecoration(
-            filled: true, // 배경색 활성화
-            fillColor: Colors.white,
-            errorText: error,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(5),
-              borderSide: const BorderSide(
-                color: Colors.grey,
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.8,
+          child: TextField(
+            controller: controller,
+            textAlign: TextAlign.center,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Colors.white,
+              errorText: error,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: const BorderSide(color: Colors.grey),
+                gapPadding: Sizes.size2,
               ),
-              gapPadding: Sizes.size2,
-            ),
-            contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-            hintText: hintText,
-            hintStyle: GoogleFonts.scheherazadeNew(
-              fontSize: Sizes.size16,
-              color: Colors.grey,
-              fontWeight: FontWeight.w400,
+              contentPadding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+              hintText: hintText,
+              hintStyle: GoogleFonts.scheherazadeNew(
+                fontSize: Sizes.size16,
+                color: Colors.grey,
+                fontWeight: FontWeight.w400,
+              ),
             ),
           ),
         )
