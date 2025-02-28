@@ -34,6 +34,7 @@ class _WaterTrackerState extends State<WaterTracker> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Color(0xFF7C7C7C),
         scaffoldBackgroundColor: const Color(0xFFE0E6FE),

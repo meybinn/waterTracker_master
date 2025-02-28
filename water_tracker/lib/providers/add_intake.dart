@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
+import 'package:water_tracker/features/dialog/goal_achieved_dialog.dart';
 import 'package:water_tracker/intake_provider.dart';
 
 // save해서 다른 전역 변수에 저장하는 기능 추가
@@ -204,18 +205,35 @@ class _AddIntakeState extends State<AddIntake> {
                 Gaps.h48,
                 GestureDetector(
                   onTap: () {
+                    final intakeProvider = context.read<IntakeProvider>();
+                    int intakeReal = intakeProvider.totalIntake;
+                    int intakeGoal = intakeProvider.intakeGoal;
+
                     setState(() {
-                      intakeReal = 0;
+                      // intakeReal = 0;
                       // context.read<IntakeProvider>().updateIntake(totalIntake);
                     });
 
-                    showDialog(
+                    if (intakeReal >= intakeGoal) {
+                      showGoalAchievedDialog(context);
+                    } else {
+                      showDialog(
                         context: context,
                         builder: (context) {
                           return AlertDialog(
                             title: Text("Your water intake saved!"),
+                            content: Text(
+                                "Your current intake has been saved successfully."),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: Text("OK"),
+                              ),
+                            ],
                           );
-                        });
+                        },
+                      );
+                    }
                   },
                   child: Container(
                     alignment: Alignment.center,

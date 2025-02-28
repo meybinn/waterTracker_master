@@ -125,6 +125,7 @@ class _SignupScreenState extends State<SignupScreen> {
     return GestureDetector(
       onTap: _onScaffoldTap,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           centerTitle: true,
           title: Text(

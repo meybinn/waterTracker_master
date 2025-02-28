@@ -121,6 +121,7 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         automaticallyImplyLeading: false, // 자동으로 생성되는 뒤로가기 버튼 제거
         centerTitle: true,

@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:water_tracker/constant/gaps.dart';
 import 'package:water_tracker/constant/sizes.dart';
+import 'package:water_tracker/features/dialog/goal_achieved_dialog.dart';
 import 'package:water_tracker/features/set_up/home_widgets.dart';
 import 'package:water_tracker/intake_provider.dart';
 import 'package:water_tracker/notification/notification.dart';
@@ -32,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   bool isStop = false;
   bool noti = false;
+  bool _isDialogShown = false;
 
   void _addwater(int intakeAmount) async {
     final intakeProvider = context.read<IntakeProvider>();
@@ -63,11 +65,12 @@ class _HomeScreenState extends State<HomeScreen>
 
     final intakeProvider = context.read<IntakeProvider>();
     int interval = intakeProvider.interval;
+    int testInterval = interval * 60; // 1시간 = 60초
 
     DateTime now = DateTime.now();
-    DateTime nextReminder = now.add(Duration(hours: interval));
-
+    DateTime nextReminder = now.add(Duration(hours: testInterval));
     _timeRemaining = nextReminder.difference(now);
+    _isDialogShown = false; // 새로운 카운트다운 시작 시 Reminder 다이얼로그 초기화
 
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (!mounted) {
@@ -101,31 +104,45 @@ class _HomeScreenState extends State<HomeScreen>
             });
           }
         });
-
-        if (mounted) {
-          showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (context) => AlertDialog(
-              title: Text('WATER REMINDER!!'),
-              content: Text('Time to drink water!! Stay hydrated💧'),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    // 기존 interval로 다시 카운트다운 시작
-                    _startCoundown();
-                  },
-                  child: Text("OK"),
-                ),
-              ],
-            ),
-          );
+        //mounted ==true _isDialogShown == false
+        if (mounted && !_isDialogShown) {
+          _isDialogShown = true;
+          drink_time_dialog().then((_) {
+            _isDialogShown = false;
+            setState(() {
+              _timeRemaining =
+                  Duration(seconds: testInterval); // 🔥 다시 1시간(60초)으로 재설정
+            });
+            _startCoundown();
+          });
         }
-
-        _startCoundown();
       }
     });
+  }
+
+  Future<void> drink_time_dialog() async {
+    if (_isDialogShown) return;
+
+    _isDialogShown = true;
+
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        title: Text('WATER REMINDER!!'),
+        content: Text('Time to drink water!! Stay hydrated💧'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              _isDialogShown = false;
+            },
+            child: Text("OK"),
+          ),
+        ],
+      ),
+    );
+    _isDialogShown = false;
   }
 
   @override
@@ -198,6 +215,7 @@ class _HomeScreenState extends State<HomeScreen>
                 ],
               ),
               Gaps.v28,
+              //설정한 목표 용량
               Text(
                 "$intakeGoal ml",
                 style: GoogleFonts.righteous(
@@ -239,6 +257,7 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                     ),
+                  //마신 용량
                   Text(
                     "$intakeReal ml",
                     style: GoogleFonts.righteous(

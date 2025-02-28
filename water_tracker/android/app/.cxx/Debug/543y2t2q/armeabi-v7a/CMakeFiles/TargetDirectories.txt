@@ -1,0 +1,2 @@
+C:/Users/pts59/Desktop/git_project/waterTracker_master/water_tracker/android/app/.cxx/Debug/543y2t2q/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/pts59/Desktop/git_project/waterTracker_master/water_tracker/android/app/.cxx/Debug/543y2t2q/armeabi-v7a/CMakeFiles/rebuild_cache.dir
